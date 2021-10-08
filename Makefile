@@ -1,0 +1,59 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: adaloui <marvin@42.fr>                     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/10/03 16:24:38 by adaloui           #+#    #+#              #
+#    Updated: 2021/10/04 17:18:57 by adaloui          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+INC=/usr/include
+
+INCLIB=$(INC)/../lib 
+
+SRCS =	./srcs/ft_draw_map.c \
+		./srcs/ft_filter.c \
+		./srcs/ft_gameplay.c \
+		./srcs/ft_keyboard.c \
+		./srcs/ft_read_map.c \
+		./srcs/get_next_line.c \
+		./srcs/get_next_line_utils.c \
+		./srcs/map_to_graph.c \
+		./srcs/so_long_utilitaries.c \
+		./srcs/so_long_utilitaries_2.c \
+		./srcs/main.c \
+
+OBJS	= ${SRCS:.c=.o}
+
+UNAME	:= $(shell uname)
+
+PATH_MLX	= minilibx-linux
+CC			= gcc
+CFLAGS		= -Wall -Wextra  
+RM			= rm -f
+NAME		= so_long
+FLAGS		= -Lminilibx-linux -lmlx -L$(INCLIB) -lXext -lX11 -lm -Iminilibx-linux minilibx-linux/libmlx.a
+
+all:		${NAME}
+
+.c.o:
+	${CC} ${CFLAGS} -Imlx -Ibass -c $< -o ${<:.c=.o}
+
+$(NAME):	$(OBJS)
+			make -C $(PATH_MLX)
+			${CC} $(CFLAGS) -o $(NAME) $(OBJS) $(FLAGS)
+
+clean:
+			make -C $(PATH_MLX) clean
+			${RM} ${OBJS}
+
+fclean: 	clean
+			make -C $(PATH_MLX) clean
+			${RM} ${NAME}
+
+re: 		fclean all
+
+.PHONY:		bonus all clean fclean re
