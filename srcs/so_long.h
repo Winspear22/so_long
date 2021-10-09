@@ -29,6 +29,11 @@ typedef struct s_vector
 	int	y;
 }				t_vector;
 
+typedef struct s_player
+{
+	t_vector pos;
+}				t_player;
+
 typedef struct s_window
 {
 	void		*ref;
@@ -51,6 +56,7 @@ typedef struct s_program
 	t_window	w;
 	t_image		sprite;
 	t_vector	pos;
+	char		**tab;
 }				t_program;
 
 typedef struct s_check
@@ -64,18 +70,13 @@ typedef struct s_check
 	int			l;
 }				t_check_map;
 
-//char		**tab;
-//t_vector	size_map;
-//t_vector	g_player_position;
-//void		*g_senzu;
-//static int	g_move_count;
-
+void	ft_init_check(t_check_map **m);
 char	*join(const char *s1, const char *s2);
 t_image		ft_new_sprite(void *mlx, char *path);
 t_window	n_window(void *mlx, int width, int height, char *name);
 int			ft_sprite_move(void *param);
-int			ft_move_character(int key, void *param, char **argv);
-t_vector	read_map(char *argv, t_vector size, char **tab);
+int			ft_move_character(int key, void *param);
+t_vector	read_map(char *argv, char **tab);
 char		*ft_get_line(char *s);
 char		*ft_get_char(char *s);
 int			ft_read(int fd, char **line);
@@ -83,11 +84,10 @@ char		*ft_malloc(char *buf);
 void		*ft_memmove(void *dst, const void *src, size_t len);
 int			get_next_line(int fd, char **line);
 char		**ft_split(const char *s, char c);
+char 		**get_map(char *argv);
 t_vector	map_size(char **full_map, t_vector size);
-void		ft_create_character( void *mlx, void *window,
-				char *path, t_program character, char **tab);
-void		ft_create_background(void *mlx, void *window,
-				char *path, t_program map);
+void		ft_create_character(char *path, t_program character, char **tab);
+void		ft_create_background(char *path, t_program map);
 void		ft_draw(char **tab, void *mlx, void *window);
 int			ft_check_name(char *str, char *ber);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
@@ -95,7 +95,7 @@ int			ft_check_map_updown(char **tab, t_vector size_map);
 int			ft_check_map_leftright(char **tab, t_vector size_map);
 int			check_map(char **tab, t_vector size_map);
 void		ft_loop_image(t_program program, char **tab);
-int			ft_count_items(char **tab, int items);
+int			ft_count_items(char **tab);
 void		ft_take(char **tab, t_program i);
 t_vector	ft_player_pos(char **tab);
 void		ft_count_movements(t_program i, int key, char **tab);
@@ -109,7 +109,7 @@ char		**ft_split(char const *s, char c);
 int			ft_toupper(int c);
 char		*ft_itoa(int i);
 void		ft_init_img(t_image img);
-void		ft_init_pgm(t_program pgm);
+void		ft_init_pgm(t_program *pgm);
 
 
 #endif

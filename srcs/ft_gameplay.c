@@ -12,10 +12,11 @@
 
 #include "so_long.h"
 
-int	ft_count_items(char **tab, int items)
+int	ft_count_items(char **tab)
 {
 	int	i;
 	int	j;
+	int	items;
 
 	i = 0;
 	j = 0;
@@ -42,6 +43,8 @@ t_vector	ft_player_pos(char **tab)
 
 	i = 0;
 	j = 0;
+	//player_pos.x = 0;
+	//player_pos.y = 0;
 	while (tab[i])
 	{
 		j = 0;

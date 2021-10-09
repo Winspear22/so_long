@@ -90,28 +90,32 @@ int	ft_check_map_elements(char **tab)
 {
 	int			i;
 	int			j;
-	t_check_map	m;
+	t_check_map		*m;
 
 	i = 0;
-	j = 0;
-	m.player = 0;
-	while (tab[i])
+	m = NULL;
+	ft_init_check(&m);
+	while (tab && tab[i])
 	{
 		j = 0;
-		while (tab[i][j])
+		while (tab[i] && tab[i][j])
 		{
 			if (tab[i][j] == 'P')
-				m.player += 1;
+				m->player += 1;
 			else if (tab[i][j] == 'C')
-				m.senzu = 1;
+				m->senzu = 1;
 			else if (tab[i][j] == 'E')
-				m.exit = 1;
+				m->exit = 1;
 			j++;
 		}
 		i++;
 	}
-	if (m.player == 1 && m.exit == 1 && m.senzu == 1)
+	if (m->player == 1 && m->exit == 1 && m->senzu == 1)
+	{
+		free(m);
 		return (1);
+	}
+	free(m);
 	return (0);
 }
 

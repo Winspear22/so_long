@@ -33,24 +33,21 @@ t_image	ft_new_sprite(void *mlx, char *path)
 	return (img);
 }
 
-void	ft_create_character(void *mlx, void *window, char *path,
-		t_program character, char **tab)
+void	ft_create_character(char *path, t_program character, char **tab)
 {
 	t_vector	player;
 
 	player = ft_player_pos(tab);
-	character.sprite = ft_new_sprite(mlx, path);
+	character.sprite = ft_new_sprite(character.mlx, path);
 	character.pos.x = player.x * 100;
 	character.pos.y = player.y * 100;
-	mlx_put_image_to_window(mlx, window,
+	mlx_put_image_to_window(character.mlx, character.w.ref,
 		character.sprite.ref, character.pos.x,
 		character.pos.y);
-	mlx_key_hook(window, *ft_move_character, &character);
-	mlx_loop_hook(mlx, *ft_sprite_move, &character);
 }
 
-void	ft_create_background(void *mlx, void *window, char *path, t_program map)
+void	ft_create_background(char *path, t_program map)
 {
-	 map.sprite = ft_new_sprite(mlx, path);
-	 mlx_put_image_to_window(mlx, window, map.sprite.ref, 0, 0);
+	 map.sprite = ft_new_sprite(map.mlx, path);
+	 mlx_put_image_to_window(map.mlx, map.w.ref, map.sprite.ref, 0, 0);
 }
