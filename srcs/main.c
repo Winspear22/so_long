@@ -46,6 +46,7 @@ void	ft_draw(char **tab, void *mlx, void *window)
 void	ft_init_pgm(t_program *pgm)
 {
 	pgm->mlx = mlx_init();
+	pgm->tab = NULL;
 	pgm->w.ref = NULL;
 	pgm->w.size.x = 0;
 	pgm->w.size.y = 0;
@@ -56,22 +57,8 @@ void	ft_init_pgm(t_program *pgm)
 	pgm->sprite.bits_per_pixel = 0;
 	pgm->sprite.line_size = 0;
 	pgm->sprite.endian = 0;
-	pgm->tab = NULL;
 }
 
-void	ft_init_check(t_check_map **m)
-{
-	*m = malloc(sizeof(t_check_map) * 2);
-	if (!m)
-		return ;
-	(*m)->exit = 0;
-        (*m)->senzu = 0;
-	(*m)->player = 0;
-	(*m)->i = 0;
-	(*m)->j = 0;
-	(*m)->k = 0;
-	(*m)->l = 0;
-}
 
 int	ft_quit(void *param)
 {
@@ -87,49 +74,7 @@ void	ft_create_game(t_program pgm)
 	ft_create_character("sprites/gokuu.xpm", pgm, pgm.tab);
 }
 
-void	ft_refresh_character(char *path, t_program character, char **tab)
-{
-	ft_create_background("sprites/namek.xpm", character);
-	ft_draw(character.tab, character.mlx, character.w.ref);
-	character.sprite = ft_new_sprite(character.mlx, path);
-	mlx_put_image_to_window(character.mlx, character.w.ref,
-		character.sprite.ref, character.pos.x * 100,
-		character.pos.y * 100);
-}
 
-
-int		ft_move_player(int key, void *param)
-{
-	t_program *i;
-
-	i = (t_program *)param;
-	printf("%d\n", key);
- 	if (key == 100 && i->tab[i->pos.y][i->pos.x + 1] != '1') //x = +1
-	{
-		i->pos.x += 1; 
-		i->sprite.size.x = i->pos.x;
-	}
-	else if (key == 97 && i->tab[i->pos.y][i->pos.x - 1] != '1') //x = -1
-	{
-		i->pos.x -= 1; 
-		i->sprite.size.x = i->pos.x;
-	}
-	else if (key == 115 && i->tab[i->pos.y + 1][i->pos.x] != '1')  //y = +1
-	{
-		i->pos.y += 1; 
-		i->sprite.size.y = i->pos.y;
-	}
-	else if (key == 119 && i->tab[i->pos.y - 1][i->pos.x] != '1')  //y = -1
-	{
-		i->pos.y -= 1; 
-		i->sprite.size.y = i->pos.y;
-	}
-	mlx_clear_window(i->mlx, i->w.ref);
-	ft_refresh_character("sprites/gokuu.xpm", *i, i->tab);
-	if (key == 65307)
-		exit(0);
-	return (0);
-}
 
 int	main(int argc, char **argv)
 {

@@ -14,15 +14,15 @@
 #include "get_next_line.h"
 #include <stdlib.h>
 
-void	ft_loop_image(t_program program, char **tab)
+
+void	ft_refresh_character(char *path, t_program character, char **tab)
 {
-	mlx_put_image_to_window(program.mlx, program.w.ref,
-		program.sprite.ref, program.pos.x,
-		program.pos.y);
-	ft_create_background("sprites/namek.xpm", program);
-	ft_draw(tab, program.mlx, program.w.ref);
-//	mlx_string_put(program.mlx, program.w.ref, 50, 50,
-//		15921105, ft_itoa((int)g_move_count));
+	ft_create_background("sprites/namek.xpm", character);
+	ft_draw(character.tab, character.mlx, character.w.ref);
+	character.sprite = ft_new_sprite(character.mlx, path);
+	mlx_put_image_to_window(character.mlx, character.w.ref,
+		character.sprite.ref, character.pos.x * 100,
+		character.pos.y * 100);
 }
 
 void	ft_take(char **tab, t_program pgm)
@@ -31,73 +31,66 @@ void	ft_take(char **tab, t_program pgm)
 
 	items = 0;
 	items = ft_count_items(tab);
-	if (tab[pgm.pos.y / 100][pgm.pos.x / 100] == 'C')
+	if (tab[pgm.pos.y][pgm.pos.x] == 'C')
 	{
-		tab[pgm.pos.y / 100][pgm.pos.x / 100] = '0';
+		tab[pgm.pos.y][pgm.pos.x] = '0';
 		items -= 1;
 	}
-	if (tab[pgm.pos.y / 100][pgm.pos.x / 100] == 'E' && items == 0)
+	if (tab[pgm.pos.y][pgm.pos.x] == 'E' && items == 0)
 	{
 		printf("Vous avez reussi le jeu, bravo !\n");
 		exit (0);
 	}
 }
 
-/*void	ft_count_movements(t_program i, int key, char **tab)
+void	ft_count_movements(t_program i, int key, char **tab)
 {
+	static int move_count;
 
-	if (key == 2 && tab[i.pos.y / 100][i.pos.x / 100 + 1] != '1')
-		g_move_count++;
-	else if (key == 0 && tab[i.pos.y / 100][i.pos.x / 100 - 1] != '1')
-		g_move_count++;
-	else if (key == 1 && tab[i.pos.y / 100 + 1][i.pos.x / 100] != '1')
-		g_move_count++;
-	else if (key == 13 && tab[i.pos.y / 100 - 1][i.pos.x / 100] != '1')
-		g_move_count++;
-	printf("Le nombre de mouvements est de = %d\n", g_move_count);
-}*/
-
-
-int	ft_move_character(int key, void *param)
-{
-	t_program	*i;
-
-	i = (t_program *)param;
-//	mlx_clear_window(i->mlx, i->w.ref);
-//	ft_count_movements(*i, key, tab);
-	if (key == 2 && i->tab[i->pos.y / 100][i->pos.x / 100 + 1] != '1')
-		i->pos.x += i->sprite.size.x;
-	else if (key == 0 && i->tab[i->pos.y / 100][i->pos.x / 100 - 1] != '1')
-		i->pos.x -= i->sprite.size.x;
-	else if (key == 1 && i->tab[i->pos.y / 100 + 1][i->pos.x / 100] != '1')
-		i->pos.y += i->sprite.size.y;
-	else if (key == 13 && i->tab[i->pos.y / 100 - 1][i->pos.x / 100] != '1')
-		i->pos.y -= i->sprite.size.y;
-	if (key == 53)
-		exit(0);
-	ft_loop_image(*i, i->tab);
-//	ft_take(i->tab, *i);
-	return (0);
+	if (key == 100 && tab[i.pos.y][i.pos.x + 1] != '1')
+		move_count++;
+	else if (key == 97 && tab[i.pos.y][i.pos.x - 1] != '1')
+		move_count++;
+	else if (key == 115 && tab[i.pos.y + 1][i.pos.x] != '1')
+		move_count++;
+	else if (key == 119 && tab[i.pos.y - 1][i.pos.x] != '1')
+		move_count++;
+	mlx_string_put(i.mlx, i.w.ref, 50, 50,
+                15921105, ft_itoa((int)move_count));
+	printf("Le nombre de mouvements est de = %d\n", move_count);
 }
 
-/*int	ft_sprite_move(void *param)
+int		ft_move_player(int key, void *param)
 {
-	t_program		*program;
-	static int		frame;
+	t_program *i;
 
-
-	ft_init_pgm(program);
-	program = (t_program *)param;
-	frame++;
-	if (frame == ANIMATION_FRAMES)
-		program->pos.y += 1;
-	else if (frame >= ANIMATION_FRAMES * 2)
+	i = (t_program *)param;
+	printf("%d\n", key);
+ 	if (key == 100 && i->tab[i->pos.y][i->pos.x + 1] != '1') //x = +1
 	{
-		program->pos.y -= 1;
-		frame = 0;
+		i->pos.x += 1; 
+		i->sprite.size.x = i->pos.x;
 	}
-	mlx_put_image_to_window(program->mlx, program->w.ref,
-		program->sprite.ref, program->pos.x,
-		program->pos.y);
+	else if (key == 97 && i->tab[i->pos.y][i->pos.x - 1] != '1') //x = -1
+	{
+		i->pos.x -= 1; 
+		i->sprite.size.x = i->pos.x;
+	}
+	else if (key == 115 && i->tab[i->pos.y + 1][i->pos.x] != '1')  //y = +1
+	{
+		i->pos.y += 1; 
+		i->sprite.size.y = i->pos.y;
+	}
+	else if (key == 119 && i->tab[i->pos.y - 1][i->pos.x] != '1')  //y = -1
+	{
+		i->pos.y -= 1; 
+		i->sprite.size.y = i->pos.y;
+	}
+	mlx_clear_window(i->mlx, i->w.ref);
+	ft_refresh_character("sprites/gokuu.xpm", *i, i->tab);
+	ft_count_movements(*i, key, i->tab);
+	ft_take(i->tab, *i);
+	if (key == 65307)
+		exit(0);
 	return (0);
-}*/
+}

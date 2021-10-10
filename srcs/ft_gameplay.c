@@ -43,8 +43,6 @@ t_vector	ft_player_pos(char **tab)
 
 	i = 0;
 	j = 0;
-	//player_pos.x = 0;
-	//player_pos.y = 0;
 	while (tab[i])
 	{
 		j = 0;
@@ -60,4 +58,18 @@ t_vector	ft_player_pos(char **tab)
 		i++;
 	}
 	return (player_pos);
+}
+
+void	ft_init_check(t_check_map **m)
+{
+	*m = malloc(sizeof(t_check_map) * 2);
+	if (!m)
+		return ;
+	(*m)->exit = 0;
+        (*m)->senzu = 0;
+	(*m)->player = 0;
+	(*m)->i = 0;
+	(*m)->j = 0;
+	(*m)->k = 0;
+	(*m)->l = 0;
 }

@@ -29,11 +29,6 @@ typedef struct s_vector
 	int	y;
 }				t_vector;
 
-typedef struct s_player
-{
-	t_vector pos;
-}				t_player;
-
 typedef struct s_window
 {
 	void		*ref;
@@ -75,7 +70,7 @@ char	*join(const char *s1, const char *s2);
 t_image		ft_new_sprite(void *mlx, char *path);
 t_window	n_window(void *mlx, int width, int height, char *name);
 int			ft_sprite_move(void *param);
-int			ft_move_character(int key, void *param);
+int			ft_move_player(int key, void *param);
 t_vector	read_map(char *argv, char **tab);
 char		*ft_get_line(char *s);
 char		*ft_get_char(char *s);
@@ -108,7 +103,6 @@ void		ft_initialize(t_check_map map);
 char		**ft_split(char const *s, char c);
 int			ft_toupper(int c);
 char		*ft_itoa(int i);
-void		ft_init_img(t_image img);
 void		ft_init_pgm(t_program *pgm);
 
 
