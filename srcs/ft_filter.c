@@ -30,7 +30,7 @@ int	ft_check_name(char *str, char *ber)
 	}
 	if (ber[j] == '\0' && str[i + j] == '\0')
 		return (1);
-	printf("Error.\nLe format du fichier n'est pas .ber.\n");
+	write(1, "Error.\nThe file format is not .ber.\n", 38);
 	return (0);
 }
 
@@ -43,7 +43,7 @@ int	ft_check_map_updown(char **tab, t_vector size_map)
 	i = 0;
 	j = 0;
 	max_y = size_map.y / 100;
-	while (tab[i])
+	while (tab && tab[i])
 	{
 		while (tab[i][j])
 		{
@@ -66,7 +66,7 @@ int	ft_check_map_leftright(char **tab, t_vector size_map)
 	i = 0;
 	j = 0;
 	max_x = size_map.x / 100;
-	while (tab[i])
+	while (tab && tab[i])
 	{
 		j = 0;
 		while (tab[i][j])
@@ -88,27 +88,23 @@ int	ft_check_map_leftright(char **tab, t_vector size_map)
 
 int	ft_check_map_elements(char **tab)
 {
-	int			i;
-	int			j;
 	t_check_map		*m;
 
-	i = 0;
-	m = NULL;
 	ft_init_check(&m);
-	while (tab && tab[i])
+	while (tab && tab[m->i])
 	{
-		j = 0;
-		while (tab[i] && tab[i][j])
+		m->j = 0;
+		while (tab[m->i] && tab[m->i][m->j])
 		{
-			if (tab[i][j] == 'P')
+			if (tab[m->i][m->j] == 'P')
 				m->player += 1;
-			else if (tab[i][j] == 'C')
+			else if (tab[m->i][m->j] == 'C')
 				m->senzu = 1;
-			else if (tab[i][j] == 'E')
+			else if (tab[m->i][m->j] == 'E')
 				m->exit = 1;
-			j++;
+			m->j++;
 		}
-		i++;
+		m->i++;
 	}
 	if (m->player == 1 && m->exit == 1 && m->senzu == 1)
 	{
@@ -130,15 +126,15 @@ int	check_map(char **tab, t_vector size_map)
 	check_three = ft_check_map_elements(tab);
 	if (check_one == 0 || check_two == 0)
 	{
-		printf("Error.\nLa carte n'est pas entouree par des murs.\n");
-		printf("Ou il y'a un caractere interdit.\n");
+		write(1, "Error.\nMap is not surrounded by walls.\n", 40);
+		write(1, "Or there are forbidden characters.\n", 35);
 		exit(0);
 	}
 	if (check_three == 0)
 	{
-		printf("Error.\nLe fichier n'est pas valide.\n");
-		printf("Trop ou pas assez de P, C, E.\n");
-		printf("Ou le fichier est un dossier.\n");
+		write(1, "Error.\nInvalid file.\n", 22);
+		write(1, "Not enough or too much P, C, E.\n", 33);
+		write(1, "Or the file is actually a directory.\n", 38);
 		exit(0);
 	}
 	return (1);

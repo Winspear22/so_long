@@ -21,14 +21,11 @@ char	*join(const char *s1, const char *s2)
 	size_t	len_s2;
 	size_t	join;
 
-//	s1 = NULL;
 	if (s1 == NULL && s2 == NULL)
 		return (NULL);
 	len_s2 = ft_strlen(s2);
 	len_s1 = ft_strlen(s1);
 	join = len_s1 + len_s2;
-//	if (!s1 && !s2)
-//		return (0);
 	str = (char *)malloc(sizeof(char *) * (join + 2));
 	if (str == NULL)
 		return (0);
@@ -44,22 +41,18 @@ char	**get_map(char *file)
 	char			*buffer;
 	char			*map;
 	char 			**full_map;
-	int				i;
 	int				fd;
  
 	map = NULL;
 	fd = open(file, O_RDONLY);
-        if (fd == -1)
-        {
-                perror("Error.\nOuverture du fichier impossible.\n");
-                exit(0);
-        }
+    if (fd < 0)
+    {
+        perror("Error.\nCannot open file.\n");
+        exit(0);
+    }
 	while (get_next_line(fd, &buffer) > 0)
 	{
 		map = join(map, buffer);
-		i = ft_strlen(map);
-		if (i <= 0)
-			return (0);
 		free(buffer);
 	}
 	full_map = ft_split(map, '\n');
@@ -75,6 +68,11 @@ t_vector	map_size(char **full_map, t_vector size)
 	j = 0;
 	size.x = 0;
 	size.y = 0;
+	if (full_map == NULL)
+	{
+		printf("Error.\nFile empty or is a repository\n");
+		exit (0);
+	}
 	while (full_map[i])
 	{
 		while (full_map[i][j])
@@ -92,9 +90,9 @@ t_vector	read_map(char *file, char **tab)
 	t_vector			map;
 
 	fd = open(file, O_RDONLY);
-	if (fd == -1)
+	if (fd < 0)
 	{
-		perror("Error.\nOuverture du fichier impossible.\n");
+		perror("Error.\nCannot open file.\n");
 		exit(0);
 	}
 	tab = get_map(file);

@@ -22,9 +22,9 @@ void	ft_draw(char **tab, void *mlx, void *window)
 	map.j = -1;
 	map.k = 0;
 	map.l = 0;
-	while (tab[++map.i] != '\0')
+	while (tab[++map.i])
 	{
-		while (tab[map.i][++map.j] != '\0')
+		while (tab[map.i][++map.j])
 		{
 			if (tab[map.i][map.j] == '1')
 				map.k = ft_draw_walls(mlx, window, map.k, map.l);
@@ -43,21 +43,21 @@ void	ft_draw(char **tab, void *mlx, void *window)
 	}
 }
 
-void	ft_init_pgm(t_program *pgm)
+/*void	ft_init_pgm(t_program pgm, t_vector size_map, char *file)
 {
-	pgm->mlx = mlx_init();
-	pgm->tab = NULL;
-	pgm->w.ref = NULL;
-	pgm->w.size.x = 0;
-	pgm->w.size.y = 0;
-	pgm->sprite.ref = NULL;
-	pgm->sprite.size.x = 0;
-	pgm->sprite.size.y = 0;
-	pgm->sprite.pixels = NULL;
-	pgm->sprite.bits_per_pixel = 0;
-	pgm->sprite.line_size = 0;
-	pgm->sprite.endian = 0;
-}
+	pgm.mlx = mlx_init();
+	pgm.tab = get_map(file);
+	size_map = read_map(file, pgm.tab);
+	pgm.w.ref = NULL;
+	pgm.w = n_window(pgm.mlx,
+			size_map.x, size_map.y, "So_long");
+	pgm.sprite.size.x = 0;
+	pgm.sprite.size.y = 0;
+	pgm.sprite.pixels = NULL;
+	pgm.sprite.bits_per_pixel = 0;
+	pgm.sprite.line_size = 0;
+	pgm.sprite.endian = 0;
+}*/
 
 
 int	ft_quit(void *param)
@@ -74,20 +74,15 @@ void	ft_create_game(t_program pgm)
 	ft_create_character("sprites/gokuu.xpm", pgm, pgm.tab);
 }
 
-
-
 int	main(int argc, char **argv)
 {
 	t_program	pgm;
 	t_vector	size_map;
 	void		*param;
 
-	//ft_init_pgm(pgm);
 	param = NULL;
-	if (argc == 2)
+	if (argc == 2 && ft_check_name(argv[1], ".ber") == 1)
 	{
-		if (ft_check_name(argv[1], ".ber") == 1)
-		{
 			pgm.mlx = mlx_init();
 			pgm.tab = get_map(argv[1]);
 			size_map = read_map(argv[1], pgm.tab);
@@ -95,15 +90,13 @@ int	main(int argc, char **argv)
 			size_map.x, size_map.y, "So_long");
 			check_map(pgm.tab, size_map);
 			pgm.pos = ft_player_pos(pgm.tab);
-			pgm.sprite.size.y = pgm.pos.y;
-			pgm.sprite.size.x = pgm.pos.x;
+			pgm.sprite.size = pgm.pos;
 			ft_create_game(pgm);
 			mlx_key_hook(pgm.w.ref, *ft_move_player, &pgm);
 			mlx_hook(pgm.w.ref, 17, 0, ft_quit, param);
 			mlx_loop(pgm.mlx);
-		}
 	}
 	else
-		printf("Error.\nIl y'a trop ou pas assez d'arguments.\n");
+		write(1, "Error.\nThere's too much or not enough arguments\n", 50);
 	return (0);
 }

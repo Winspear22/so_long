@@ -20,8 +20,7 @@
 # include <unistd.h>
 # include "get_next_line.h"
 
-# define ANIMATION_FRAMES 15
-# define BUFFER_SIZE 10000
+# define BUFFER_SIZE 100
 
 typedef struct s_vector
 {
@@ -93,7 +92,7 @@ void		ft_loop_image(t_program program, char **tab);
 int			ft_count_items(char **tab);
 void		ft_take(char **tab, t_program i);
 t_vector	ft_player_pos(char **tab);
-void		ft_count_movements(t_program i, int key, char **tab);
+void		ft_count_movements(t_program i, int key);
 int			ft_quit(void *param);
 int			ft_toupper(int i);
 int			ft_draw_walls(void *mlx, void *window, int k, int l);
@@ -103,7 +102,7 @@ void		ft_initialize(t_check_map map);
 char		**ft_split(char const *s, char c);
 int			ft_toupper(int c);
 char		*ft_itoa(int i);
-void		ft_init_pgm(t_program *pgm);
+void		ft_init_pgm(t_program pgm, t_vector map, char * file);
 
 
 #endif
