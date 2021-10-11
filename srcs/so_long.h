@@ -20,7 +20,7 @@
 # include <unistd.h>
 # include "get_next_line.h"
 
-# define BUFFER_SIZE 100
+# define BUFFER_SIZE 1
 
 typedef struct s_vector
 {
@@ -103,4 +103,5 @@ char		**ft_split(char const *s, char c);
 int			ft_toupper(int c);
 char		*ft_itoa(int i);
 void		ft_init_pgm(t_program pgm, t_vector map, char *file);
+int			ft_draw_grass(void *mlx, void *window, int k, int l);
 #endif

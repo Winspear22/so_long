@@ -45,9 +45,3 @@ void	ft_create_character(char *path, t_program character, char **tab)
 		character.sprite.ref, character.pos.x,
 		character.pos.y);
 }
-
-void	ft_create_background(char *path, t_program map)
-{
-	 map.sprite = ft_new_sprite(map.mlx, path);
-	 mlx_put_image_to_window(map.mlx, map.w.ref, map.sprite.ref, 0, 0);
-}

@@ -29,13 +29,13 @@ void	ft_draw(char **tab, void *mlx, void *window)
 			if (tab[map.i][map.j] == '1')
 				map.k = ft_draw_walls(mlx, window, map.k, map.l);
 			else if (tab[map.i][map.j] == '0')
-				map.k = map.k + 100;
+				map.k = ft_draw_grass(mlx, window, map.k, map.l);
 			if (tab[map.i][map.j] == 'C')
 				map.k = ft_draw_items(mlx, window, map.k, map.l);
 			if (tab[map.i][map.j] == 'E')
 				map.k = ft_draw_exit(mlx, window, map.k, map.l);
 			else if (tab[map.i][map.j] == 'P')
-				map.k = map.k + 100;
+				map.k = ft_draw_grass(mlx, window, map.k, map.l);
 		}
 		map.j = -1;
 		map.l = map.l + 100;
@@ -52,7 +52,6 @@ int	ft_quit(void *param)
 
 void	ft_create_game(t_program pgm)
 {
-	ft_create_background("sprites/namek.xpm", pgm);
 	ft_draw(pgm.tab, pgm.mlx, pgm.w.ref);
 	ft_create_character("sprites/gokuu.xpm", pgm, pgm.tab);
 }
@@ -75,6 +74,7 @@ int	main(int argc, char **argv)
 			check_map(pgm.tab, size_map);
 			pgm.pos = ft_player_pos(pgm.tab);
 			pgm.sprite.size = pgm.pos;
+			pgm.move_count = 0;
 			ft_create_game(pgm);
 			mlx_key_hook(pgm.w.ref, *ft_move_player, &pgm);
 			mlx_hook(pgm.w.ref, 17, 0, ft_quit, param);

@@ -41,3 +41,14 @@ int	ft_draw_exit(void *mlx, void *window, int k, int l)
 	k = k + 100;
 	return (k);
 }
+
+int	ft_draw_grass(void *mlx, void *window, int k, int l)
+{	
+	t_program	walls;
+
+	walls.sprite = ft_new_sprite(mlx, "sprites/grass.xpm");
+	mlx_put_image_to_window(mlx, window, walls.sprite.ref, k, l);
+	k = k + 100;
+	return (k);
+	
+}

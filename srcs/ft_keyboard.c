@@ -16,7 +16,6 @@
 
 void	ft_refresh_character(char *path, t_program character)
 {
-	ft_create_background("sprites/namek.xpm", character);
 	ft_draw(character.tab, character.mlx, character.w.ref);
 	character.sprite = ft_new_sprite(character.mlx, path);
 	mlx_put_image_to_window(character.mlx, character.w.ref,
@@ -54,7 +53,6 @@ void	ft_count_movements(t_program i, int key)
 		move_count++;
 	else if (key == 119 && i.tab[i.pos.y - 1][i.pos.x] != '1')
 		move_count++;
-	mlx_string_put(i.mlx, i.w.ref, 50, 50, 15921105, ft_itoa((int)move_count));
 	write(1, "The number of mouvements is ", 29);
 	printf("%d\n", move_count);
 }
