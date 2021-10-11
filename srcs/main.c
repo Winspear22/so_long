@@ -74,7 +74,6 @@ int	main(int argc, char **argv)
 			check_map(pgm.tab, size_map);
 			pgm.pos = ft_player_pos(pgm.tab);
 			pgm.sprite.size = pgm.pos;
-			pgm.move_count = 0;
 			ft_create_game(pgm);
 			mlx_key_hook(pgm.w.ref, *ft_move_player, &pgm);
 			mlx_hook(pgm.w.ref, 17, 0, ft_quit, param);

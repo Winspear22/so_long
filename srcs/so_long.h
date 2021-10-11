@@ -92,7 +92,7 @@ void		ft_loop_image(t_program program, char **tab);
 int			ft_count_items(char **tab);
 void		ft_take(char **tab, t_program i);
 t_vector	ft_player_pos(char **tab);
-void		ft_count_movements(t_program i, int key);
+static int	ft_count_movements(t_program i, int key);
 int			ft_quit(void *param);
 int			ft_toupper(int i);
 int			ft_draw_walls(void *mlx, void *window, int k, int l);

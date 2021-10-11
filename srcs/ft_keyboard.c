@@ -41,7 +41,7 @@ void	ft_take(char **tab, t_program pgm)
 	}
 }
 
-void	ft_count_movements(t_program i, int key)
+static int	ft_count_movements(t_program i, int key)
 {
 	static int	move_count;
 
@@ -55,14 +55,16 @@ void	ft_count_movements(t_program i, int key)
 		move_count++;
 	write(1, "The number of mouvements is ", 29);
 	printf("%d\n", move_count);
+	return ((int)move_count);
 }
 
 int	ft_move_player(int key, void *param)
 {
 	t_program	*i;
+	int j;
 
 	i = (t_program *)param;
-	ft_count_movements(*i, key);
+	j = ft_count_movements(*i, key);
 	if (key == 100 && i->tab[i->pos.y][i->pos.x + 1] != '1')
 		i->pos.x += 1;
 	else if (key == 97 && i->tab[i->pos.y][i->pos.x - 1] != '1')
@@ -75,5 +77,7 @@ int	ft_move_player(int key, void *param)
 	ft_take(i->tab, *i);
 	if (key == 65307)
 		exit(0);
+	mlx_string_put(i->mlx, i->w.ref,
+	 50, 50, 15921105, ft_itoa(j));
 	return (0);
 }
