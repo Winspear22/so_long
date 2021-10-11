@@ -6,7 +6,7 @@
 /*   By: adaloui <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 18:59:14 by adaloui           #+#    #+#             */
-/*   Updated: 2021/10/11 14:22:52 by adaloui          ###   ########.fr       */
+/*   Updated: 2021/10/11 14:45:36 by adaloui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	main(int argc, char **argv)
 	void		*param;
 
 	param = NULL;
-	if (argc == 2)  
+	if (argc == 2)
 	{
 		if (ft_check_name(argv[1], ".ber") == 1)
 		{
