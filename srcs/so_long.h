@@ -6,7 +6,7 @@
 /*   By: adaloui <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 23:54:21 by adaloui           #+#    #+#             */
-/*   Updated: 2021/10/03 22:00:34 by adaloui          ###   ########.fr       */
+/*   Updated: 2021/10/11 14:15:57 by adaloui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ typedef struct s_check
 	int			l;
 }				t_check_map;
 
-void	ft_init_check(t_check_map **m);
-char	*join(const char *s1, const char *s2);
+void		ft_init_check(t_check_map **m);
+char		*join(const char *s1, const char *s2);
 t_image		ft_new_sprite(void *mlx, char *path);
 t_window	n_window(void *mlx, int width, int height, char *name);
 int			ft_sprite_move(void *param);
@@ -78,7 +78,7 @@ char		*ft_malloc(char *buf);
 void		*ft_memmove(void *dst, const void *src, size_t len);
 int			get_next_line(int fd, char **line);
 char		**ft_split(const char *s, char c);
-char 		**get_map(char *argv);
+char		**get_map(char *argv);
 t_vector	map_size(char **full_map, t_vector size);
 void		ft_create_character(char *path, t_program character, char **tab);
 void		ft_create_background(char *path, t_program map);
@@ -102,7 +102,5 @@ void		ft_initialize(t_check_map map);
 char		**ft_split(char const *s, char c);
 int			ft_toupper(int c);
 char		*ft_itoa(int i);
-void		ft_init_pgm(t_program pgm, t_vector map, char * file);
-
-
+void		ft_init_pgm(t_program pgm, t_vector map, char *file);
 #endif

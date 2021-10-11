@@ -6,7 +6,7 @@
 /*   By: adaloui <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 18:59:14 by adaloui           #+#    #+#             */
-/*   Updated: 2021/10/04 16:51:18 by adaloui          ###   ########.fr       */
+/*   Updated: 2021/10/11 14:22:52 by adaloui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,23 +43,6 @@ void	ft_draw(char **tab, void *mlx, void *window)
 	}
 }
 
-/*void	ft_init_pgm(t_program pgm, t_vector size_map, char *file)
-{
-	pgm.mlx = mlx_init();
-	pgm.tab = get_map(file);
-	size_map = read_map(file, pgm.tab);
-	pgm.w.ref = NULL;
-	pgm.w = n_window(pgm.mlx,
-			size_map.x, size_map.y, "So_long");
-	pgm.sprite.size.x = 0;
-	pgm.sprite.size.y = 0;
-	pgm.sprite.pixels = NULL;
-	pgm.sprite.bits_per_pixel = 0;
-	pgm.sprite.line_size = 0;
-	pgm.sprite.endian = 0;
-}*/
-
-
 int	ft_quit(void *param)
 {
 	(void)param;
@@ -83,18 +66,17 @@ int	main(int argc, char **argv)
 	param = NULL;
 	if (argc == 2 && ft_check_name(argv[1], ".ber") == 1)
 	{
-			pgm.mlx = mlx_init();
-			pgm.tab = get_map(argv[1]);
-			size_map = read_map(argv[1], pgm.tab);
-			pgm.w = n_window(pgm.mlx,
-			size_map.x, size_map.y, "So_long");
-			check_map(pgm.tab, size_map);
-			pgm.pos = ft_player_pos(pgm.tab);
-			pgm.sprite.size = pgm.pos;
-			ft_create_game(pgm);
-			mlx_key_hook(pgm.w.ref, *ft_move_player, &pgm);
-			mlx_hook(pgm.w.ref, 17, 0, ft_quit, param);
-			mlx_loop(pgm.mlx);
+		pgm.mlx = mlx_init();
+		pgm.tab = get_map(argv[1]);
+		size_map = read_map(argv[1], pgm.tab);
+		pgm.w = n_window(pgm.mlx, size_map.x, size_map.y, "So_long");
+		check_map(pgm.tab, size_map);
+		pgm.pos = ft_player_pos(pgm.tab);
+		pgm.sprite.size = pgm.pos;
+		ft_create_game(pgm);
+		mlx_key_hook(pgm.w.ref, *ft_move_player, &pgm);
+		mlx_hook(pgm.w.ref, 17, 0, ft_quit, param);
+		mlx_loop(pgm.mlx);
 	}
 	else
 		write(1, "Error.\nThere's too much or not enough arguments\n", 50);

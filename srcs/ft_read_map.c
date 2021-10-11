@@ -6,7 +6,7 @@
 /*   By: adaloui <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 13:16:00 by adaloui           #+#    #+#             */
-/*   Updated: 2021/10/04 17:11:44 by adaloui          ###   ########.fr       */
+/*   Updated: 2021/10/11 14:21:01 by adaloui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,16 @@ char	**get_map(char *file)
 {
 	char			*buffer;
 	char			*map;
-	char 			**full_map;
+	char			**full_map;
 	int				fd;
- 
+
 	map = NULL;
 	fd = open(file, O_RDONLY);
-    if (fd < 0)
-    {
-        perror("Error.\nCannot open file.\n");
-        exit(0);
-    }
+	if (fd < 0)
+	{
+		perror("Error.\nCannot open file.\n");
+		exit(0);
+	}
 	while (get_next_line(fd, &buffer) > 0)
 	{
 		map = join(map, buffer);
@@ -87,7 +87,7 @@ t_vector	map_size(char **full_map, t_vector size)
 t_vector	read_map(char *file, char **tab)
 {
 	int				fd;
-	t_vector			map;
+	t_vector		map;
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
