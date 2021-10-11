@@ -41,7 +41,7 @@ void	ft_take(char **tab, t_program pgm)
 	}
 }
 
-static int	ft_count_movements(t_program i, int key)
+int	ft_count_movements(t_program i, int key)
 {
 	static int	move_count;
 
