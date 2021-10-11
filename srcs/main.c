@@ -64,21 +64,24 @@ int	main(int argc, char **argv)
 	void		*param;
 
 	param = NULL;
-	if (argc == 2 && ft_check_name(argv[1], ".ber") == 1)
+	if (argc == 2)  
 	{
-		pgm.mlx = mlx_init();
-		pgm.tab = get_map(argv[1]);
-		size_map = read_map(argv[1], pgm.tab);
-		pgm.w = n_window(pgm.mlx, size_map.x, size_map.y, "So_long");
-		check_map(pgm.tab, size_map);
-		pgm.pos = ft_player_pos(pgm.tab);
-		pgm.sprite.size = pgm.pos;
-		ft_create_game(pgm);
-		mlx_key_hook(pgm.w.ref, *ft_move_player, &pgm);
-		mlx_hook(pgm.w.ref, 17, 0, ft_quit, param);
-		mlx_loop(pgm.mlx);
+		if (ft_check_name(argv[1], ".ber") == 1)
+		{
+			pgm.mlx = mlx_init();
+			pgm.tab = get_map(argv[1]);
+			size_map = read_map(argv[1], pgm.tab);
+			pgm.w = n_window(pgm.mlx, size_map.x, size_map.y, "So_long");
+			check_map(pgm.tab, size_map);
+			pgm.pos = ft_player_pos(pgm.tab);
+			pgm.sprite.size = pgm.pos;
+			ft_create_game(pgm);
+			mlx_key_hook(pgm.w.ref, *ft_move_player, &pgm);
+			mlx_hook(pgm.w.ref, 17, 0, ft_quit, param);
+			mlx_loop(pgm.mlx);
+		}
 	}
 	else
-		write(1, "Error.\nThere's too much or not enough arguments\n", 50);
+		write(1, "Error.\nThere's too much or not enough arguments\n", 49);
 	return (0);
 }

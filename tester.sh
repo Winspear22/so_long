@@ -7,9 +7,9 @@ echo "$(tput setaf 2)Wrong walls$(tput setaf 7)"; ./so_long maps/map_wrongleft.b
 echo "$(tput setaf 2)Wrong walls$(tput setaf 7)"; ./so_long maps/map_wrongup.ber;
 echo "$(tput setaf 2)Sans argument$(tput setaf 7)"; ./so_long;
 echo "$(tput setaf 2)Map sans joueur$(tput setaf 7)"; ./so_long maps/map_no_p.ber;
-echo "$(tput setaf 2)Map sans exit$(tput setaf 7)";  ./so_long maps/map_no_e.ber;
-echo "$(tput setaf 2)Map sans collectibles$(tput setaf 7)";  ./so_long maps/map_no_c.ber;
-echo "$(tput setaf 2)Map avec plusieurs joueurs$(tput setaf 7)";  ./so_long maps/map_two_player.ber;
-echo "$(tput setaf 2)Map complètement vide$(tput setaf 7)";  ./so_long maps/map.ber;
-echo "$(tput setaf 2)Tenter d'ouvrir un dossier$(tput setaf 7)";  ./so_long maps/maap.ber;
-echo "$(tput setaf 2)Lancement d'une vraie map$(tput setaf 7)";  ./so_long maps/map_valid.ber;
+echo "$(tput setaf 2)Map sans exit$(tput setaf 7)"; ./so_long maps/map_no_e.ber;
+echo "$(tput setaf 2)Map sans collectibles$(tput setaf 7)"; ./so_long maps/map_no_c.ber;
+echo "$(tput setaf 2)Map avec plusieurs joueurs$(tput setaf 7)"; ./so_long maps/map_two_player.ber;
+echo "$(tput setaf 2)Map complètement vide$(tput setaf 7)"; ./so_long maps/map.ber;
+echo "$(tput setaf 2)Tenter d'ouvrir un dossier$(tput setaf 7)"; ./so_long maps/maap.ber;
+echo "$(tput setaf 2)Lancement d'une vraie map$(tput setaf 7)"; ./so_long maps/map_valid.ber;
