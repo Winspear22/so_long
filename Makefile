@@ -16,16 +16,8 @@ INC=/usr/include
 INCLIB=/usr/include/X11
 
 
-SRCS =	./srcs/ft_draw_map.c \
-		./srcs/ft_filter.c \
-		./srcs/ft_gameplay.c \
-		./srcs/ft_keyboard.c \
-		./srcs/ft_read_map.c \
-		./srcs/get_next_line.c \
+SRCS =	./srcs/get_next_line.c \
 		./srcs/get_next_line_utils.c \
-		./srcs/map_to_graph.c \
-		./srcs/so_long_utilitaries.c \
-		./srcs/so_long_utilitaries_2.c \
 		./srcs/main.c \
 
 OBJS	= ${SRCS:.c=.o}
