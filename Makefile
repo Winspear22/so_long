@@ -11,10 +11,7 @@
 # **************************************************************************** #
 
 INC=/usr/include
-
-#INCLIB=$(INC)/../lib 
 INCLIB=/usr/include/X11
-
 
 SRCS =	./srcs/get_next_line.c \
 		./srcs/get_next_line_utils.c \
@@ -31,23 +28,35 @@ RM			= rm -f
 NAME		= so_long
 FLAGS		= -Lminilibx-linux -lmlx -L$(INCLIB) -lXext -lX11 -lm -Iminilibx-linux minilibx-linux/libmlx.a
 
+LIBFTPRINTF = libftprintf.a
+LIBFTPRINTF_PATH = ft_printf
+LIBFTPRINTF_MAKE = $(LIBFTPRINTF_PATH)/Makefile
+LIBFTPRINTF_MAKE_COMMAND = $(MAKE) -C $(LIBFTPRINTF_PATH)
+
 all:		${NAME}
 
 .c.o:
 	${CC} ${CFLAGS} -Imlx -Ibass -c $< -o ${<:.c=.o}
 
-$(NAME):	$(OBJS)
+$(LIBFTPRINTF):
+	$(LIBFTPRINTF_MAKE_COMMAND)
+
+$(NAME):	$(LIBFTPRINTF) $(OBJS)
 			make -C $(PATH_MLX)
-			${CC} $(CFLAGS) -o $(NAME) $(OBJS) $(FLAGS)
+			${CC} $(CFLAGS) -o $(NAME) $(OBJS) $(FLAGS) -L$(LIBFTPRINTF_PATH) -lftprintf
+
 
 clean:
 			make -C $(PATH_MLX) clean
 			$(RM) $(OBJS)
 			$(RM) $(NAME)
+			$(LIBFTPRINTF_MAKE_COMMAND) clean
 
 fclean: 	clean
 			make -C $(PATH_MLX) clean
-			${RM} ${NAME}
+			$(RM) ${NAME}
+			$(RM) $(LIBFTPRINTF)
+			$(LIBFTPRINTF_MAKE_COMMAND) fclean
 
 re: 		fclean all
 
