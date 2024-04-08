@@ -1,24 +1,15 @@
 # include "so_long.h"
 
-int	check_directory(char *argv)
+int	check_directory(char *av)
 {
 	int	fd;
-	int fd2;
 
-	fd = open(argv, O_RDONLY);
-    if (fd < 0)
+	fd = open(av, O_DIRECTORY);
+	if (fd > 0)
 	{
 		close(fd);
-        return FAILURE;
-	}
-	close(fd);
-	fd2 = open(argv, O_DIRECTORY);
-	if (fd2 > 0)
-	{
-		close(fd2);
 		return (FAILURE);
 	}
-	close(fd2);
 	return (SUCCESS);
 }
 
@@ -67,6 +58,7 @@ int is_executable(const char *filename)
         return FAILURE;
     // Lire les métadonnées du fichier
     char mode;
+	mode = 0;
     if (read(fd, &mode, sizeof(mode)) == FAILURE)
     {
         close(fd);

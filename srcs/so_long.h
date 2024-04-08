@@ -30,13 +30,15 @@
 /* ---------------------STRUCTURES---------------------*/
 /* =================================================== */
 
-/*typedef struct 	s_data
+typedef struct 	s_data
 {
 	void		*mlx_ptr; // MLX pointer
 	void		*win_ptr; // MLX window pointer
+	int			win_height;
+	int			win_width;
 	void		*textures[5]; // MLX image pointers (on the stack)
 	//t_map		*map; // Map pointer (contains map details - preferably kept on the stack)
-}				t_data;*/
+}				t_data;
 
 /* =================================================== */
 
