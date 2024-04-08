@@ -12,6 +12,7 @@
 
 INC=/usr/include
 INCLIB=/usr/include/X11
+
 SRCS =	./srcs/get_next_line.c \
 		./srcs/get_next_line_utils.c \
 		./srcs/errors.c \
@@ -25,7 +26,7 @@ UNAME	:= $(shell uname)
 
 PATH_MLX	= minilibx-linux
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror  
+CFLAGS		= -Wall -Wextra -Werror -I$(INC) -I$(INCLIB)
 RM			= rm -f
 NAME		= so_long
 FLAGS		= -Lminilibx-linux -lmlx -L$(INCLIB) -lXext -lX11 -lm -Iminilibx-linux minilibx-linux/libmlx.a
@@ -65,11 +66,10 @@ fclean: 	clean
 
 re: 		fclean all
 
-# Exécution silencieuse de make et make fclean
 silent_make:
 			make --no-print-directory -s | pv -l >/dev/null
 
 silent_fclean:
 			make --no-print-directory -s fclean | pv -l >/dev/null
 
-.PHONY:		bonus all clean fclean re silent_make silent_fclean
+.PHONY:		all clean fclean re silent_make silent_fclean
