@@ -56,7 +56,8 @@ int main(int argc, char **argv, char **env)
 	init_data(data);
 	if (check_file_content(argv[1], data) == FAILURE)
 	{
-	
+		free_data(data);
+		free(data);
 		ft_printf("%s%s%s", RED, "Error in the second step.", RESET);
 		return (FAILURE);
 	}

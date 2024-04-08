@@ -16,6 +16,7 @@ INCLIB=/usr/include/X11
 SRCS =	./srcs/get_next_line.c \
 		./srcs/get_next_line_utils.c \
 		./srcs/errors.c \
+		./srcs/free.c \
 		./srcs/first_step_parse.c \
 		./srcs/second_step_parse.c \
 		./srcs/get_map_content.c \
