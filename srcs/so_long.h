@@ -30,6 +30,14 @@
 /* ---------------------STRUCTURES---------------------*/
 /* =================================================== */
 
+typedef struct	s_map
+{
+	char		**map;
+	int			fd;
+	int			count_line;
+
+}				t_map;
+
 typedef struct 	s_data
 {
 	void		*mlx_ptr; // MLX pointer
@@ -37,7 +45,7 @@ typedef struct 	s_data
 	int			win_height;
 	int			win_width;
 	void		*textures[5]; // MLX image pointers (on the stack)
-	//t_map		*map; // Map pointer (contains map details - preferably kept on the stack)
+	t_map		*map; // Map pointer (contains map details - preferably kept on the stack)
 }				t_data;
 
 /* =================================================== */
@@ -47,7 +55,15 @@ typedef struct 	s_data
 /* -----------------------ERRORS.C---------------------*/
 /* =================================================== */
 
-int	return_failure(char *error_str);
+int			return_failure(char *error_str);
+
+/* =================================================== */
+
+/* =================================================== */
+/* ------------------------INIT.C----------------------*/
+/* =================================================== */
+
+void		init_data(t_data *data);
 
 /* =================================================== */
 
@@ -56,17 +72,33 @@ int	return_failure(char *error_str);
 /* -----------------FIRST_STEP_PARSE-------------------*/
 /* =================================================== */
 
-int	check_directory(char *av);
-int	check_file_existence(char *av);
-int	check_extension(char *av);
-int check_arguments(int argc, char *argv);
+int			check_directory(char *av);
+int			check_file_existence(char *av);
+int			check_extension(char *av);
+int			check_arguments(int argc, char *argv);
+int			is_executable(const char *filename);
 
 /* =================================================== */
+
+
+/* =================================================== */
+/* -----------------SECOND_STEP_PARSE------------------*/
+/* =================================================== */
+
+int			check_get_next_line(char *line);
+t_map		*reduce_count_line(t_data *data, int fd);
+t_map		*count_line(char *s, t_data *data);
+int			check_file_content(char *argv, t_data *data);
+
+/* =================================================== */
+
 
 /* =================================================== */
 /* -----------------------UTILS.C-(--------------------*/
 /* =================================================== */
 
-int	parse(char *argv);
+int			parse(char *argv);
+char		*strdup_no_n(const char *s1);
+
 
 #endif

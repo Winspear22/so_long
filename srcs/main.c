@@ -53,6 +53,14 @@ int main(int argc, char **argv, char **env)
 	data = malloc(sizeof(t_data));
 	if (!data)
 		return (FAILURE);
+	init_data(data);
+	if (check_file_content(argv[1], data) == FAILURE)
+	{
+	
+		ft_printf("%s%s%s", RED, "Error in the second step.", RESET);
+		return (FAILURE);
+	}
+
 	init_window(data);
     ft_printf("%s%s%s", GREEN, "réussite", RESET);
 	mlx_loop(data->mlx_ptr);
