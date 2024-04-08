@@ -3,13 +3,22 @@
 int	check_directory(char *argv)
 {
 	int	fd;
+	int fd2;
 
-	fd = open(argv, O_DIRECTORY);
-	if (fd > 0)
+	fd = open(argv, O_RDONLY);
+    if (fd < 0)
 	{
 		close(fd);
+        return FAILURE;
+	}
+	close(fd);
+	fd2 = open(argv, O_DIRECTORY);
+	if (fd2 > 0)
+	{
+		close(fd2);
 		return (FAILURE);
 	}
+	close(fd2);
 	return (SUCCESS);
 }
 
@@ -51,6 +60,25 @@ int	check_extension(char *argv)
 	return (SUCCESS);
 }
 
+int is_executable(const char *filename)
+{
+    int fd = open(filename, O_RDONLY);
+    if (fd == FAILURE)
+        return FAILURE;
+    // Lire les métadonnées du fichier
+    char mode;
+    if (read(fd, &mode, sizeof(mode)) == FAILURE)
+    {
+        close(fd);
+        return FAILURE;
+    }
+    close(fd);
+    // Vérifier si le bit d'exécution est défini dans les permissions du fichier
+    if (mode & S_IXUSR)
+        return FAILURE; // Le fichier est un exécutable
+    return SUCCESS; // Le fichier n'est pas un exécutable
+}
+
 
 int	check_arguments(int argc, char *argv)
 {
@@ -64,6 +92,9 @@ int	check_arguments(int argc, char *argv)
 	ret = check_directory(argv);
 	if (ret == FAILURE)
 		return (return_failure("Error. You are trying to open a directory."));
+	ret = is_executable(argv);
+	if (ret == FAILURE)
+		return (return_failure("Error. You are trying to open an executable."));
 	ret = check_file_existence(argv);
 	if (ret == FAILURE)
 		return (return_failure("Error. No file existing or no permission."));
