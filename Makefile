@@ -12,10 +12,11 @@
 
 INC=/usr/include
 INCLIB=/usr/include/X11
-
 SRCS =	./srcs/get_next_line.c \
 		./srcs/get_next_line_utils.c \
 		./srcs/errors.c \
+		./srcs/first_step_parse.c \
+		./srcs/utils.c \
 		./srcs/main.c \
 
 OBJS	= ${SRCS:.c=.o}
@@ -34,18 +35,21 @@ LIBFTPRINTF_PATH = ft_printf
 LIBFTPRINTF_MAKE = $(LIBFTPRINTF_PATH)/Makefile
 LIBFTPRINTF_MAKE_COMMAND = $(MAKE) -C $(LIBFTPRINTF_PATH)
 
+LIBFT_PATH = ft_printf/libft
+LIBFT_A = $(LIBFT_PATH)/libft.a
+LIBFT_INC = -I$(LIBFT_PATH)
+
 all:		${NAME}
 
 .c.o:
-	${CC} ${CFLAGS} -Imlx -Ibass -c $< -o ${<:.c=.o}
+	${CC} ${CFLAGS} -Imlx -Ibass $(LIBFT_INC) -c $< -o ${<:.c=.o}
 
 $(LIBFTPRINTF):
 	$(LIBFTPRINTF_MAKE_COMMAND)
 
 $(NAME):	$(LIBFTPRINTF) $(OBJS)
 			make -C $(PATH_MLX)
-			${CC} $(CFLAGS) -o $(NAME) $(OBJS) $(FLAGS) -L$(LIBFTPRINTF_PATH) -lftprintf
-
+			${CC} $(CFLAGS) -o $(NAME) $(OBJS) $(FLAGS) -L$(LIBFT_PATH) -lft -L$(LIBFTPRINTF_PATH) -lftprintf
 
 clean:
 			make -C $(PATH_MLX) clean

@@ -9,9 +9,11 @@
 
 # include "get_next_line.h"
 # include "../ft_printf/ft_printf.h"
+# include "../ft_printf/libft/libft.h"
+
 
 # define SUCCESS	0
-# define FAILURE	1
+# define FAILURE	-1
 
 # define RESET		"\033[0m"
 # define BLACK		"\033[1;30m"
@@ -33,9 +35,20 @@ int	return_failure(char *error_str);
 
 
 /* =================================================== */
+/* -----------------FIRST_STEP_PARSE-------------------*/
 /* =================================================== */
 
+int	check_directory(char *av);
+int	check_file_existence(char *av);
+int	check_extension(char *av);
+int check_arguments(int argc, char *argv);
 
 /* =================================================== */
+
+/* =================================================== */
+/* -----------------------UTILS.C-(--------------------*/
+/* =================================================== */
+
+int	parse(char *argv);
 
 #endif
