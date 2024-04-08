@@ -30,7 +30,7 @@ int	ft_check_name(char *str, char *ber)
 	}
 	if (ber[j] == '\0' && str[i + j] == '\0')
 		return (1);
-	write(1, "Error.\nThe file format is not .ber.\n", 38);
+	write(1, "Error.\nThe file format is not .ber.\n", 37);
 	return (0);
 }
 

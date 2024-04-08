@@ -12,7 +12,9 @@
 
 INC=/usr/include
 
-INCLIB=$(INC)/../lib 
+#INCLIB=$(INC)/../lib 
+INCLIB=/usr/include/X11
+
 
 SRCS =	./srcs/ft_draw_map.c \
 		./srcs/ft_filter.c \
@@ -48,7 +50,8 @@ $(NAME):	$(OBJS)
 
 clean:
 			make -C $(PATH_MLX) clean
-			${RM} ${OBJS}
+			$(RM) $(OBJS)
+			$(RM) $(NAME)
 
 fclean: 	clean
 			make -C $(PATH_MLX) clean
