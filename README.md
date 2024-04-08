@@ -40,3 +40,6 @@ Pour lancer so_long, il suffit de lancer le programme avec une map existente et 
 ```./so_long maps/map_valid02.ber```
 
 Toute map invalide renverra une erreur.
+
+
+sudo apt-get install pv (pour la barre du Makefile)

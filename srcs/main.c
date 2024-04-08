@@ -7,9 +7,9 @@ int main(int argc, char **argv, char **env)
     (void)argv;
     (void)env;
     if (!(*env))
-		return (return_failure("Error\nNo environment."));
+		return (return_failure("Error. No environment."));
     if (check_arguments(argc, argv[1]) == FAILURE)
 		return (FAILURE);
-    ft_printf("%s", "réussite\n");
+    ft_printf("%s%s%s", GREEN, "réussite", RESET);
     return (SUCCESS);
 }

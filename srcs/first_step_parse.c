@@ -60,18 +60,17 @@ int	check_arguments(int argc, char *argv)
 
 	ret = 0;
 	if (argc != 2)
-		return (return_failure("Error.\nWrong number of arguments."));
+		return (return_failure("Error. Wrong number of arguments."));
 	ret = check_directory(argv);
 	if (ret == FAILURE)
-		return (return_failure("Error.\nYou are trying to open a directory."));
+		return (return_failure("Error. You are trying to open a directory."));
 	ret = check_file_existence(argv);
 	if (ret == FAILURE)
-		return (return_failure("Error.\nNo file existing or no permission."));
+		return (return_failure("Error. No file existing or no permission."));
 	ret = check_extension(argv);
 	if (ret == FAILURE)
-		return (return_failure("Error.\nExtension map invalid."));
+		return (return_failure("Error. Extension map invalid."));
 	if (ret == 1)
-		return (return_failure("Error.\nExtension file missing."));
-	ft_printf("%s", "réussite\n");
+		return (return_failure("Error. Extension file missing."));
 	return (SUCCESS);
 }

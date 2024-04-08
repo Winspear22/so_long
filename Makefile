@@ -65,4 +65,11 @@ fclean: 	clean
 
 re: 		fclean all
 
-.PHONY:		bonus all clean fclean re
+# Exécution silencieuse de make et make fclean
+silent_make:
+			make --no-print-directory -s | pv -l >/dev/null
+
+silent_fclean:
+			make --no-print-directory -s fclean | pv -l >/dev/null
+
+.PHONY:		bonus all clean fclean re silent_make silent_fclean
