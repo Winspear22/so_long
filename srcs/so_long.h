@@ -30,12 +30,18 @@
 /* ---------------------STRUCTURES---------------------*/
 /* =================================================== */
 
+typedef struct s_verif
+{
+	long long	exit;
+	long long	player;
+	long long	collectible;
+}				t_verif;
+
 typedef struct	s_map
 {
 	char		**map;
 	int			fd;
 	int			count_line;
-
 }				t_map;
 
 typedef struct 	s_data
@@ -63,13 +69,14 @@ int			return_failure(char *error_str);
 /* ------------------------INIT.C----------------------*/
 /* =================================================== */
 
-void		init_data(t_data *data);
+int			init_data(t_data *data);
+t_verif		verif_init(void);
 
 /* =================================================== */
 
 
 /* =================================================== */
-/* -----------------FIRST_STEP_PARSE-------------------*/
+/* -----------------FIRST_STEP_PARSE.C-----------------*/
 /* =================================================== */
 
 int			check_directory(char *av);
@@ -82,13 +89,28 @@ int			is_executable(const char *filename);
 
 
 /* =================================================== */
-/* -----------------SECOND_STEP_PARSE------------------*/
+/* ----------------SECOND_STEP_PARSE.C-----------------*/
+/* =================================================== */
+
+int			check_file_content(char *argv, t_data *data);
+
+/* =================================================== */
+
+/* =================================================== */
+/* ------------------GET_MAP_CONTENT.C-----------------*/
 /* =================================================== */
 
 int			check_get_next_line(char *line);
 t_map		*reduce_count_line(t_data *data, int fd);
 t_map		*count_line(char *s, t_data *data);
-int			check_file_content(char *argv, t_data *data);
+
+/* =================================================== */
+
+/* =================================================== */
+/* -----------------CHECK_LINE_CONTENT.C---------------*/
+/* =================================================== */
+
+int			check_line_content(t_map *map, t_data *data);
 
 /* =================================================== */
 

@@ -1,10 +1,21 @@
 # include "so_long.h"
 
-void	init_data(t_data *data)
+t_verif	verif_init(void)
+{
+	t_verif	check;
+
+	check.exit = 0;
+	check.player = 0;
+	check.collectible = 0;
+	return (check);
+}
+
+
+int	init_data(t_data *data)
 {
 	data->map = malloc(sizeof(t_map));
 	if (!data->map)
-		return ;
+        return (return_failure("Error. Could not initialiaze t_map."));
 	/*data->map_info = malloc(sizeof(t_map_info));
 	if (!data->map_info)
 		return ;
@@ -25,4 +36,5 @@ void	init_data(t_data *data)
 	data->map->player.p_pos.y = 0;
 	data->map->gap = 0;
 	data->map->is_map = 0;*/
+    return (SUCCESS);
 }

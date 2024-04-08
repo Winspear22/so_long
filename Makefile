@@ -18,6 +18,8 @@ SRCS =	./srcs/get_next_line.c \
 		./srcs/errors.c \
 		./srcs/first_step_parse.c \
 		./srcs/second_step_parse.c \
+		./srcs/get_map_content.c \
+		./srcs/check_line_content.c \
 		./srcs/init.c \
 		./srcs/utils.c \
 		./srcs/main.c \
