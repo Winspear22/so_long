@@ -15,6 +15,7 @@ INCLIB=/usr/include/X11
 
 SRCS =	./srcs/get_next_line.c \
 		./srcs/get_next_line_utils.c \
+		./srcs/errors.c \
 		./srcs/main.c \
 
 OBJS	= ${SRCS:.c=.o}
