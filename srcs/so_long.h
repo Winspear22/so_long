@@ -30,7 +30,13 @@
 /* ---------------------STRUCTURES---------------------*/
 /* =================================================== */
 
-typedef struct s_verif
+typedef struct	s_vector
+{
+	int			x;
+	int			y;
+}				t_vector;
+
+typedef struct	s_verif
 {
 	long long	exit;
 	long long	player;
@@ -42,6 +48,7 @@ typedef struct	s_map
 	char		**map;
 	int			fd;
 	int			count_line;
+	t_vector	map_max_size;
 }				t_map;
 
 typedef struct 	s_data

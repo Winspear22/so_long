@@ -58,6 +58,51 @@ int	check_filled_lines(char **map, t_verif *check, t_data *data)
 	return (SUCCESS);
 }
 
+int check_all_elements(t_map *map, t_verif check)
+{
+	int i;
+	int j;
+
+	i = -1;
+	while (map->map[++i])
+	{
+		j = -1;
+		while (map->map[i][++j])
+		{
+			if (map->map[i][j] == 'P')
+				check.player++;
+			if (map->map[i][j] == 'E')
+				check.exit++;
+			if (map->map[i][j] == 'C')
+				check.collectible++;
+		}
+	}
+	if (check.player != 1 || check.exit == 0 || check.collectible == 0)
+		return (FAILURE);
+	return (SUCCESS);
+}
+
+/*int check_filled_lines(t_map *map, t_verif check, t_data *data)
+{
+	int i;
+	int j;
+
+	i = -1;
+	while (map->map[++i])
+	{
+		j = -1;
+		while (map->map[i][++j])
+		{
+			if (map->map[i][j] == 'P')
+				check.player++;
+			if (map->map[i][j] == 'E')
+				check.exit++;
+			if (map->map[i][j] == 'C')
+				check.collectible++;
+		}
+	}
+}*/
+
 int	check_line_content(t_map *map, t_data *data)
 {
 	t_verif	check;
@@ -66,8 +111,10 @@ int	check_line_content(t_map *map, t_data *data)
     (void)check;
     (void)map;
     (void)data;
-    if (check_filled_lines(map->map, &check, data) == FAILURE)
-		return (return_failure("Error parsing.\n"));
+	if (check_all_elements(map, check) == FAILURE)
+		return (return_failure("Error parsing 1.\n"));
+    //if (check_filled_lines(map->map, &check, data) == FAILURE)
+	//	return (return_failure("Error parsing 2.\n"));
 	return (SUCCESS);
 
 }
