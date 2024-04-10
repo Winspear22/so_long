@@ -14,7 +14,7 @@ int	check_get_next_line(char *line)
 	return (FAILURE);
 }
 
-t_map	*reduce_count_line(t_data *data, int fd)
+t_map	*reduce_get_map(t_data *data, int fd)
 {
 	char	*line;
 	int		i;
@@ -45,20 +45,22 @@ t_vector	get_map_size(t_data *data)//char **full_map, t_vector size)
 	int			j;
 	t_vector	map_size;
 
-	i = -1;
-	j = -1;
-	while (data->map->map[++i])
+	i = 0;
+	j = 0;
+	while (data->map->map[i])
 	{
-		while (data->map->map[i][++j])
+		while (data->map->map[i][j])
 			j++;
 		i++;
 	}
+	printf("%d\n", j);
+	printf("%d\n", i);
 	map_size.x = j * 100;
 	map_size.y = i * 100;
 	return (map_size);
 }
 
-t_map	*count_line(char *s, t_data *data)
+t_map	*get_map(char *s, t_data *data)
 {
 	int		fd;
 
@@ -67,10 +69,13 @@ t_map	*count_line(char *s, t_data *data)
 		return (NULL);
 	fd = open(s, O_RDONLY);
 	if (fd < 0)
+	{
 		ft_printf("%s", "Error. Open map.ber failed.");
+		return (NULL);
+	}
 	else
 	{
-		data->map = reduce_count_line(data, fd);
+		data->map = reduce_get_map(data, fd);
 		data->map->map_max_size = get_map_size(data);
 	}
 	return (data->map);

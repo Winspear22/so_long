@@ -120,8 +120,8 @@ int			check_file_content(char *argv, t_data *data);
 /* =================================================== */
 
 int			check_get_next_line(char *line);
-t_map		*reduce_count_line(t_data *data, int fd);
-t_map		*count_line(char *s, t_data *data);
+t_map		*reduce_get_map(t_data *data, int fd);
+t_map		*get_map(char *s, t_data *data);
 
 /* =================================================== */
 
@@ -129,7 +129,7 @@ t_map		*count_line(char *s, t_data *data);
 /* -----------------CHECK_LINE_CONTENT.C---------------*/
 /* =================================================== */
 
-int			check_line_content(t_map *map, t_data *data);
+int			check_map_content(t_map *map, t_data *data);
 
 /* =================================================== */
 

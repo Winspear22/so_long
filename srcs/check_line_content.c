@@ -103,7 +103,7 @@ int check_all_elements(t_map *map, t_verif check)
 	}
 }*/
 
-int	check_line_content(t_map *map, t_data *data)
+int	check_map_content(t_map *map, t_data *data)
 {
 	t_verif	check;
 
