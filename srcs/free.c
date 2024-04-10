@@ -18,9 +18,14 @@ void	free_struct(t_map *map)
 {
 	if (map->map)
 		free_tab(map->map);
-	/*if (map->map_2)
-		free_tab(map->map_2);*/
+	/*if (map->map_max_size.x && map->map_max_size.y)
+	{
+		free(map->map_max_size.x);
+		free(map->map_max_size.y);
+	}*/
 	free(map);
+	printf("%s%ld\n", "size of map 4 = ", sizeof(map));
+
 }
 
 void	free_data(t_data *data)
@@ -35,6 +40,8 @@ void	free_data(t_data *data)
 		mlx_destroy_image(data->mlx, data->north.img);
 	if (data->screen.img != NULL)
 		mlx_destroy_image(data->mlx, data->screen.img);*/
-	if (data->map)
-		free_struct(data->map);
+//	if (data->map)
+//		free_struct(data->map);
+    if (data->map)
+        free_struct(data->map);
 }

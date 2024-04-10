@@ -99,11 +99,12 @@ t_vector	get_map_size(t_data *data)//char **full_map, t_vector size)
 t_map	*get_map(char *s, t_data *data)
 {
 	int		fd;
+	s = "toto";
 
 	fd = open(s, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_printf("%s", "Error. Open map.ber failed.");
+		ft_printf("%s", "Error. Open map.ber failed ici.");
 		return (NULL);
 	}
 	else

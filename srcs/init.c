@@ -16,6 +16,7 @@ int	init_data(t_data *data)
 	data->map = malloc(sizeof(t_map));
 	if (!data->map)
         return (return_failure("Error. Could not initialiaze t_map."));
+	printf("%s%ld\n", "size of map 0 = ", sizeof(t_map));
 	/*data->map_info = malloc(sizeof(t_map_info));
 	if (!data->map_info)
 		return ;

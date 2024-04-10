@@ -54,10 +54,19 @@ int main(int argc, char **argv, char **env)
 	if (!data)
 		return (FAILURE);
 	init_data(data);
+	printf("%s%ld\n", "size of data 1 = ", sizeof(data));
+	printf("%s%ld\n", "size of map 1 = ", sizeof(data->map));
+
 	if (check_file_content(argv[1], data) == FAILURE)
 	{
+		printf("%s%ld\n", "size of data 2 = ", sizeof(data));
+		printf("%s%ld\n", "size of map 2 = ", sizeof(data->map));
+
+
 		free_data(data);
-		free(data);
+		//printf("%s%ld\n", "size of data 3 = ", sizeof(data));
+		//printf("%s%ld\n", "size of map 3 = ", sizeof(data->map));
+        free(data); // Libération de la mémoire pour data
 		ft_printf("%s%s%s", RED, "Error in the second step.", RESET);
 		return (FAILURE);
 	}
