@@ -13,7 +13,7 @@ int	check_file_content(char *argv, t_data *data)
 	}
 	ft_printf("%s", "Taille de la map\n");
 	ft_printf("%s%d\n%s%d\n", "x = ", data->map->map_max_size.x, "y = ", data->map->map_max_size.y);
-	if (check_map_content(data->map, data) == FAILURE)
+	if (check_map_content(data->map) == FAILURE)
 		return (FAILURE);
 	return (SUCCESS);
 

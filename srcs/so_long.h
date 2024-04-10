@@ -129,7 +129,7 @@ t_map		*get_map(char *s, t_data *data);
 /* -----------------CHECK_LINE_CONTENT.C---------------*/
 /* =================================================== */
 
-int			check_map_content(t_map *map, t_data *data);
+int			check_map_content(t_map *map);
 
 /* =================================================== */
 
