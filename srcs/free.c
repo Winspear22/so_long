@@ -24,7 +24,7 @@ void	free_struct(t_map *map)
 		free(map->map_max_size.y);
 	}*/
 	free(map);
-	printf("%s%ld\n", "size of map 4 = ", sizeof(map));
+	//printf("%s%ld\n", "size of map 4 = ", sizeof(map));
 
 }
 

@@ -99,19 +99,23 @@ t_vector	get_map_size(t_data *data)//char **full_map, t_vector size)
 t_map	*get_map(char *s, t_data *data)
 {
 	int		fd;
-	s = "toto";
 
 	fd = open(s, O_RDONLY);
 	if (fd < 0)
 	{
+		free_data(data);
 		ft_printf("%s", "Error. Open map.ber failed ici.");
 		return (NULL);
 	}
 	else
 	{
+		s = "toto";
 		data->map->count_line = get_number_of_lines(s);
 		if (data->map->count_line == FAILURE)
+		{
+			free_data(data);
 			return (NULL);
+		}
 		data->map = reduce_get_map(data, fd);
 		data->map->map_max_size = get_map_size(data);
 	}
