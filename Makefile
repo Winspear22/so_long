@@ -23,6 +23,8 @@ SRCS =	./srcs/get_next_line.c \
 		./srcs/check_line_content.c \
 		./srcs/init.c \
 		./srcs/utils.c \
+		./srcs/window.c \
+		./srcs/create_textures.c \
 		./srcs/main.c \
 
 OBJS	= ${SRCS:.c=.o}

@@ -109,7 +109,6 @@ t_map	*get_map(char *s, t_data *data)
 	}
 	else
 	{
-		s = "toto";
 		data->map->count_line = get_number_of_lines(s);
 		if (data->map->count_line == FAILURE)
 		{

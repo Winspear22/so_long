@@ -10,6 +10,38 @@ t_verif	verif_init(void)
 	return (check);
 }
 
+void	init_img(t_data *data)
+{
+	data->screen.bpp = 0;
+	data->screen.height = 0;
+	data->screen.width = 0;
+	data->screen.endian = 0;
+	data->screen.line = 0;
+	data->screen.status = 0;
+	data->screen.img = NULL;
+	data->screen.addr = NULL;
+}
+
+void	init_floor_walls_texture(t_data *data)
+{
+	data->floor_texture.bpp = 0;
+	data->floor_texture.height = 0;
+	data->floor_texture.width = 0;
+	data->floor_texture.endian = 0;
+	data->floor_texture.line = 0;
+	data->floor_texture.status = 0;
+	data->floor_texture.img = NULL;
+	data->floor_texture.addr = NULL;
+	data->walls_texture.bpp = 0;
+	data->walls_texture.height = 0;
+	data->walls_texture.width = 0;
+	data->walls_texture.endian = 0;
+	data->walls_texture.line = 0;
+	data->walls_texture.status = 0;
+	data->walls_texture.img = NULL;
+	data->walls_texture.addr = NULL;
+}
+
 
 int	init_data(t_data *data)
 {
@@ -24,10 +56,14 @@ int	init_data(t_data *data)
 	init_east_west(data);
 	init_ray(data);
 	init_img(data);*/
+	init_img(data);
+	init_floor_walls_texture(data);
 	data->map->map = NULL;
 	//data->map->map_2 = NULL;
 	data->map->fd = 0;
 	data->map->count_line = 0;
+	data->walls_texture_name = NULL;
+	data->floor_texture_name = NULL;
 	/*data->map->space_in_map_2 = 0;
 	data->map_info->no_texture = NULL;
 	data->map_info->so_texture = NULL;

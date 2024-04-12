@@ -36,6 +36,19 @@ typedef struct	s_vector
 	int			y;
 }				t_vector;
 
+typedef struct	s_img
+{
+	void		*img;
+	char		*addr;
+	int			bpp;
+	int			height;
+	int			width;
+	int			endian;
+	int			line;
+	int			status;
+}				t_img;
+
+
 typedef struct	s_verif
 {
 	long long	exit;
@@ -59,6 +72,13 @@ typedef struct 	s_data
 	int			win_width;
 	void		*textures[5]; // MLX image pointers (on the stack)
 	t_map		*map; // Map pointer (contains map details - preferably kept on the stack)
+	
+	t_img		screen;
+	t_img		walls_texture;
+	t_img		floor_texture;
+
+	char		*walls_texture_name;
+	char		*floor_texture_name;
 }				t_data;
 
 /* =================================================== */
@@ -70,6 +90,7 @@ typedef struct 	s_data
 
 int			return_failure(char *error_str);
 int			ret_free(char *error_str, char **tab);
+int			ret_free_txt(char *error_str, char **s_byspace, t_data *data);
 
 /* =================================================== */
 
@@ -78,6 +99,7 @@ int			ret_free(char *error_str, char **tab);
 /* =================================================== */
 
 void		free_tab(char **str);
+void		free_loading_txt_failed(t_data *data, char **s_byspace);
 void		free_struct(t_map *map);
 void		free_data(t_data *data);
 
@@ -135,11 +157,25 @@ int			check_map_content(t_map *map);
 
 
 /* =================================================== */
-/* -----------------------UTILS.C-(--------------------*/
+/* -----------------------UTILS.C----------------------*/
 /* =================================================== */
 
 int			parse(char *argv);
 char		*strdup_no_n(const char *s1);
 
+/* =================================================== */
+/*------------------------WINDOW.C---------------------*/
+/* =================================================== */
+
+int			put_new_image_on_screen(t_data *data);
+int			init_window(t_data *data);
+
+/* =================================================== */
+/*------------------------WINDOW.C---------------------*/
+/* =================================================== */
+
+int	get_xpm_to_img(t_data *data, char **s, char *texture, t_img *txt);
+int	reduce_create_textures_wall(t_data *data, char *s);
+int create_textures_wall(t_data *data);
 
 #endif
