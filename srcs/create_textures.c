@@ -12,7 +12,7 @@ int get_xpm_to_img(t_data *data, char **s, char *texture, t_img *txt)
         return (ret_free_txt("Error\nmlx_get_data_addr failed.", s, data));
     txt->status = 1;
     printf("%s\n", "ici 4!!!");
-    mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, txt->img, 0, 0);
+    //mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, txt->img, 0, 0);
 
     return (SUCCESS);
 }

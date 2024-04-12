@@ -16,8 +16,8 @@ int	put_new_image_on_screen(t_data *data)
 
 int	init_window(t_data *data)
 {
-	data->win_width = 800;
-	data->win_height = 600;
+	data->win_width = data->map->map_max_size.x;
+	data->win_height = data->map->map_max_size.y;
 	data->mlx_ptr = mlx_init();
 	if (data->mlx_ptr == NULL)
 		return (FAILURE);
