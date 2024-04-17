@@ -40,7 +40,8 @@ t_img	ft_new_sprite(void *mlx, char *path)
 
 int	ft_create_character(void *mlx, void *window, int k, int l, t_data *data)
 {
-	data->character_texture = ft_new_sprite(mlx, "sprites/gokuu.xpm");
+	if (data->character_texture.img == NULL)
+		data->character_texture = ft_new_sprite(mlx, "sprites/gokuu.xpm");
 	mlx_put_image_to_window(mlx, window,
 		data->character_texture.img, k, l);
     k = k + 100;
@@ -79,7 +80,8 @@ int	ft_draw_items(void *mlx, void *window, int k, int l, t_data *data)
 
 int	ft_draw_exit(void *mlx, void *window, int k, int l, t_data *data)
 {
-    data->exit_texture = ft_new_sprite(mlx, "sprites/freezer.xpm"); 
+	if (data->exit_texture.img == NULL)
+    	data->exit_texture = ft_new_sprite(mlx, "sprites/freezer.xpm"); 
 	mlx_put_image_to_window(mlx, window, data->exit_texture.img,
     k, l);
 	k = k + 100;
@@ -137,13 +139,9 @@ int	close_redx(t_data *data)
 int loop(t_data *data)
 {
     //ft_draw(data->map->map, data->mlx_ptr, data->win_ptr, data);
-	//mlx_loop_hook(data->mlx_ptr, ft_draw, data);
-	    ft_printf("%s%s%s", GREEN, "réussite 1", RESET);
-
+	mlx_loop_hook(data->mlx_ptr, ft_draw, data);
     mlx_hook(data->win_ptr, 17, 0L, &close_redx, data);
-	    ft_printf("%s%s%s", GREEN, "réussite 2", RESET);
 	mlx_loop(data->mlx_ptr);
-	    ft_printf("%s%s%s", GREEN, "réussite 3", RESET);
 	return (SUCCESS);
 }
 
@@ -175,7 +173,7 @@ int main(int argc, char **argv, char **env)
 		return (FAILURE);
 	/*if (create_textures_wall(data) == FAILURE)
 		return (FAILURE);*/
-	ft_draw(data);
+	//ft_draw(data);
     ft_printf("%s%s%s", GREEN, "réussite", RESET);
 	loop(data);		
     return (SUCCESS);

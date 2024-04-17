@@ -38,13 +38,8 @@ void	free_loading_txt_failed(t_data *data, char **s_byspace)
 		mlx_destroy_image(data->mlx_ptr, data->character_texture.img);
 	if (data->screen.status == 1)
 		mlx_destroy_image(data->mlx_ptr, data->screen.img);
-	/*if (data->north.status == 1)
-		mlx_destroy_image(data->mlx, data->north.img);
-	if (data->south.status == 1)
-		mlx_destroy_image(data->mlx, data->south.img);*/
 	if (data->win_ptr)
 	{
-		//free_map_info(data->map_info, data);
 		if (data->screen.img != NULL)
 			mlx_destroy_image(data->mlx_ptr, data->screen.img);
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
