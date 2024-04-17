@@ -30,6 +30,18 @@
 /* ---------------------STRUCTURES---------------------*/
 /* =================================================== */
 
+
+typedef struct s_check
+{
+	int			exit;
+	int			senzu;
+	int			player;
+	int			i;
+	int			j;
+	int			k;
+	int			l;
+}				t_check_map;
+
 typedef struct	s_vector
 {
 	int			x;
@@ -75,7 +87,11 @@ typedef struct 	s_data
 	
 	t_img		screen;
 	t_img		walls_texture;
+	t_img		collectible_texture;
 	t_img		floor_texture;
+	t_img		exit_texture;
+	t_img		character_texture;
+	t_vector	character_pos;
 
 	char		*walls_texture_name;
 	char		*floor_texture_name;

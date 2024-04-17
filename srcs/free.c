@@ -51,16 +51,18 @@ void	free_struct(t_map *map)
 
 void	free_data(t_data *data)
 {
-	/*if (data->east.img != NULL)
-		mlx_destroy_image(data->mlx, data->east.img);
-	if (data->west.img != NULL)
-		mlx_destroy_image(data->mlx, data->west.img);
-	if (data->south.img != NULL)
-		mlx_destroy_image(data->mlx, data->south.img);
-	if (data->north.img != NULL)
-		mlx_destroy_image(data->mlx, data->north.img);
+    if (data->walls_texture.img != NULL)
+		mlx_destroy_image(data->mlx_ptr, data->walls_texture.img);
+	if (data->floor_texture.img != NULL)
+		mlx_destroy_image(data->mlx_ptr, data->floor_texture.img);
+	if (data->character_texture.img != NULL)
+		mlx_destroy_image(data->mlx_ptr, data->character_texture.img);
+	if (data->exit_texture.img != NULL)
+		mlx_destroy_image(data->mlx_ptr, data->exit_texture.img);
+    if (data->collectible_texture.img != NULL)
+		mlx_destroy_image(data->mlx_ptr, data->collectible_texture.img);
 	if (data->screen.img != NULL)
-		mlx_destroy_image(data->mlx, data->screen.img);*/
+		mlx_destroy_image(data->mlx_ptr, data->screen.img);
     if (data->map)
         free_struct(data->map);
 }

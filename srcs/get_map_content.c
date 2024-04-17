@@ -87,6 +87,11 @@ t_vector	get_map_size(t_data *data)//char **full_map, t_vector size)
 	{
 		while (data->map->map[i][j])
 			j++;
+		if (data->map->map[i][j] == 'P')
+		{
+			data->character_pos.x = j * 100;
+			data->character_pos.y = i * 100;
+		}
 		i++;
 	}
 	printf("%d\n", j);
