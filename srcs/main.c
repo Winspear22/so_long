@@ -124,7 +124,6 @@ int	close_redx(t_data *data)
 	if (data->win_ptr)
 	{
 		//free_map_info(data->map_info, data);
-		printf("JZ SUIS LA\n");
 		free_data(data);
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 		mlx_destroy_display(data->mlx_ptr);

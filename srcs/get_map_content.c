@@ -38,7 +38,7 @@ int		get_number_of_lines(char *s)
 		line = get_next_line(fd2);
 	}
 	close(fd2);
-	printf("%s%d", "number of line in file = ", i);
+	ft_printf("%s%d", "number of line in file = ", i);
 	return (i);
 }
 
@@ -94,8 +94,8 @@ t_vector	get_map_size(t_data *data)//char **full_map, t_vector size)
 		}
 		i++;
 	}
-	printf("%d\n", j);
-	printf("%d\n", i);
+	ft_printf("%d\n", j);
+	ft_printf("%d\n", i);
 	map_size.x = j * 100;
 	map_size.y = i * 100;
 	return (map_size);

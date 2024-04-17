@@ -4,10 +4,7 @@ int	check_file_content(char *argv, t_data *data)
 {
     data->map = get_map(argv, data);
 	if (data->map == NULL)
-	{
-		printf("hello\n");
 		return (FAILURE);
-	}
 	int i = 0;
 	while (data->map->map[i])
 	{

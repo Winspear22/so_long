@@ -76,7 +76,6 @@ int	init_data(t_data *data)
 	data->map = malloc(sizeof(t_map));
 	if (!data->map)
         return (return_failure("Error. Could not initialiaze t_map."));
-	printf("%s%ld\n", "size of map = ", sizeof(t_map));
 	init_img(data);
 	init_floor_walls_texture(data);
 	init_collectible_exit(data);

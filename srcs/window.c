@@ -10,7 +10,6 @@ int	put_new_image_on_screen(t_data *data)
 			&data->screen.line, &data->screen.endian);
 	if (!data->screen.addr)
 		return (return_failure("Error\nInit display\n"));
-    printf("%s\n", "JE SUIS ICI");
 	return (SUCCESS);
 }
 
