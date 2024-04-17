@@ -1,27 +1,6 @@
 
 # include "so_long.h"
 
-
-/*int draw_every_texture(t_data *data, t_img **textures, int num_textures) {
-    int i, j, k;
-    int texture_width, texture_height;
-    int screen_width = data->win_width;
-    int screen_height = data->win_height;
-
-    for (i = 0; i < num_textures; i++) {
-        t_img *img = textures[i];
-        // Copie les données de la texture sur la texture globale
-        for (j = 0; j < img->height && j < screen_height; j++) {
-            for (k = 0; k < img->width && k < screen_width; k++) {
-                int screen_index = (k * data->screen.bpp >> 3) + j * data->screen.line;
-                int texture_index = (k * img->bpp >> 3) + j * img->line;
-                data->screen.addr[screen_index] = img->addr[texture_index];
-            }
-        }
-    }
-    return SUCCESS;
-}*/
-
 t_vector	ft_player_pos(char **tab)
 {
 	int			i;
@@ -140,9 +119,10 @@ int	close_redx(t_data *data)
 	if (data->win_ptr)
 	{
 		//free_map_info(data->map_info, data);
+		printf("JZ SUIS LA\n");
 		free_data(data);
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-		//mlx_destroy_display(data->mlx_ptr);
+		mlx_destroy_display(data->mlx_ptr);
 		data->win_ptr = NULL;
 	}
 	free(data->mlx_ptr);
@@ -192,8 +172,8 @@ int main(int argc, char **argv, char **env)
 	}
 	if (init_window(data) == FAILURE)
 		return (FAILURE);
-	if (create_textures_wall(data) == FAILURE)
-		return (FAILURE);
+	/*if (create_textures_wall(data) == FAILURE)
+		return (FAILURE);*/
     ft_printf("%s%s%s", GREEN, "réussite", RESET);
 	loop(data);
     return (SUCCESS);

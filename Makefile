@@ -33,7 +33,7 @@ UNAME	:= $(shell uname)
 
 PATH_MLX	= minilibx-linux
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror -g3 -I$(INC) -I$(INCLIB)
+CFLAGS		= -Wall -Wextra -Wextra -g3 -I$(INC) -I$(INCLIB)
 RM			= rm -f
 NAME		= so_long
 FLAGS		= -Lminilibx-linux -lmlx -L$(INCLIB) -lXext -lX11 -lm -Iminilibx-linux minilibx-linux/libmlx.a

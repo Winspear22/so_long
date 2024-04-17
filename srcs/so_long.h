@@ -1,11 +1,12 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include <mlx.h>
+# include "../minilibx-linux/mlx.h"
 # include <stdlib.h>
 # include <stdio.h>
 # include <fcntl.h>
 # include <X11/X.h>
+# include <X11/keysym.h>
 # include <unistd.h>
 
 # include "get_next_line.h"
