@@ -49,7 +49,8 @@ int	ft_create_character(void *mlx, void *window, int k, int l, t_data *data)
 
 int	ft_draw_walls(void *mlx, void *window, int k, int l, t_data *data)
 {
-    data->walls_texture = ft_new_sprite(mlx, "sprites/wallhd.xpm"); 
+	if (data->walls_texture.img == NULL)
+    	data->walls_texture = ft_new_sprite(mlx, "sprites/wallhd.xpm"); 
 	mlx_put_image_to_window(mlx, window, data->walls_texture.img,
     k, l);
 	k = k + 100;
@@ -58,7 +59,8 @@ int	ft_draw_walls(void *mlx, void *window, int k, int l, t_data *data)
 
 int	ft_draw_grass(void *mlx, void *window, int k, int l, t_data *data)
 {	
-    data->floor_texture = ft_new_sprite(mlx, "sprites/grass.xpm"); 
+	if (data->floor_texture.img == NULL)
+    	data->floor_texture = ft_new_sprite(mlx, "sprites/grass.xpm"); 
 	mlx_put_image_to_window(mlx, window, data->floor_texture.img,
     k, l);
 	k = k + 100;
@@ -67,7 +69,8 @@ int	ft_draw_grass(void *mlx, void *window, int k, int l, t_data *data)
 
 int	ft_draw_items(void *mlx, void *window, int k, int l, t_data *data)
 {
-    data->collectible_texture = ft_new_sprite(mlx, "sprites/senzu.xpm"); 
+	if (data->collectible_texture.img == NULL)
+		data->collectible_texture = ft_new_sprite(mlx, "sprites/senzu.xpm"); 
 	mlx_put_image_to_window(mlx, window, data->collectible_texture.img,
     k, l);
 	k = k + 100;
@@ -134,15 +137,13 @@ int	close_redx(t_data *data)
 int loop(t_data *data)
 {
     //ft_draw(data->map->map, data->mlx_ptr, data->win_ptr, data);
-	mlx_loop_hook(data->mlx_ptr, ft_draw, data);
+	//mlx_loop_hook(data->mlx_ptr, ft_draw, data);
 	    ft_printf("%s%s%s", GREEN, "réussite 1", RESET);
 
     mlx_hook(data->win_ptr, 17, 0L, &close_redx, data);
 	    ft_printf("%s%s%s", GREEN, "réussite 2", RESET);
-
 	mlx_loop(data->mlx_ptr);
 	    ft_printf("%s%s%s", GREEN, "réussite 3", RESET);
-
 	return (SUCCESS);
 }
 
@@ -174,7 +175,8 @@ int main(int argc, char **argv, char **env)
 		return (FAILURE);
 	/*if (create_textures_wall(data) == FAILURE)
 		return (FAILURE);*/
+	ft_draw(data);
     ft_printf("%s%s%s", GREEN, "réussite", RESET);
-	loop(data);
+	loop(data);		
     return (SUCCESS);
 }

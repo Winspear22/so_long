@@ -60,17 +60,38 @@ void	free_loading_txt_failed(t_data *data, char **s_byspace)
 void	free_data(t_data *data)
 {
     if (data->walls_texture.img != NULL)
+	{
+		printf("ICIKIIIIIIII 111");
 		mlx_destroy_image(data->mlx_ptr, data->walls_texture.img);
+	}
 	if (data->floor_texture.img != NULL)
+	{
+		printf("ICIKIIIIIIII 222");
 		mlx_destroy_image(data->mlx_ptr, data->floor_texture.img);
+
+	}
 	if (data->character_texture.img != NULL)
+	{
+		printf("ICIKIIIIIIII 333");
 		mlx_destroy_image(data->mlx_ptr, data->character_texture.img);
+
+	}
 	if (data->exit_texture.img != NULL)
+	{
+		printf("ICIKIIIIIIII 444");
 		mlx_destroy_image(data->mlx_ptr, data->exit_texture.img);
+
+	}
     if (data->collectible_texture.img != NULL)
+	{
+		printf("ICIKIIIIIIII 555");
 		mlx_destroy_image(data->mlx_ptr, data->collectible_texture.img);
+	}
 	if (data->screen.img != NULL)
+	{
+		printf("ICIKIIIIIIII 666");
 		mlx_destroy_image(data->mlx_ptr, data->screen.img);
+	}
     if (data->map)
         free_struct(data->map);
 }
