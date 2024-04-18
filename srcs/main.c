@@ -40,7 +40,7 @@ t_img	ft_new_sprite(void *mlx, char *path)
 
 int	ft_create_character(void *mlx, void *window, int k, int l, t_data *data)
 {
-	if (data->character_texture.img == NULL)
+	//if (data->character_texture.img == NULL)
 		data->character_texture = ft_new_sprite(mlx, "sprites/gokuu.xpm");
 	mlx_put_image_to_window(mlx, window,
 		data->character_texture.img, k, l);
@@ -198,8 +198,9 @@ int	release_keyboard(int key, t_data *data)
 
 void	ft_refresh_character(char *path, t_data *data)
 {
+	(void)path;
 	ft_draw(data);
-	data->character_texture = ft_new_sprite(data->mlx_ptr, path);
+	//data->character_texture = ft_new_sprite(data->mlx_ptr, path);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 		data->character_texture.img, data->map->player.p_pos.x * 100, data->map->player.p_pos.y * 100);
 }
@@ -220,6 +221,8 @@ int ft_move_player(int key, t_data *data)
 	if (key == XK_Escape)
 		close_redx(data);
 	//free_data(data);
+	if (data->character_texture.img != NULL)
+		mlx_destroy_image(data->mlx_ptr, data->character_texture.img);
 	ft_refresh_character("sprites/gokuu.xpm", data);
 	return SUCCESS;
 
