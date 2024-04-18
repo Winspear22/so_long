@@ -91,5 +91,7 @@ int	init_data(t_data *data)
 	data->map->player.gamplay.look_left = 0;
 	data->map->player.gamplay.look_right = 0;
 	data->map->player.gamplay.escape = 0;
+	data->map->player_switch = 0;
+	data->map->senzu_switch = 0;
     return (SUCCESS);
 }

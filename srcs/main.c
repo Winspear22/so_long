@@ -37,17 +37,6 @@ t_img	ft_new_sprite(void *mlx, char *path)
 	return (img);
 }
 
-
-int	ft_create_character(void *mlx, void *window, int k, int l, t_data *data)
-{
-	//if (data->character_texture.img == NULL)
-		data->character_texture = ft_new_sprite(mlx, "sprites/gokuu.xpm");
-	mlx_put_image_to_window(mlx, window,
-		data->character_texture.img, k, l);
-    k = k + 100;
-    return (k);
-}
-
 int	ft_draw_walls(void *mlx, void *window, int k, int l, t_data *data)
 {
 	if (data->walls_texture.img == NULL)
@@ -88,6 +77,26 @@ int	ft_draw_exit(void *mlx, void *window, int k, int l, t_data *data)
 	return (k);
 }
 
+int	ft_create_character(void *mlx, void *window, int k, int l, t_data *data)
+{
+	if (data->map->player_switch == 0)
+	{
+		data->character_texture = ft_new_sprite(mlx, "sprites/gokuu.xpm");
+		data->map->player_switch = 1;
+		mlx_put_image_to_window(mlx, window,
+		data->character_texture.img, k, l);
+    	k = k + 100;
+	}
+	else
+	{
+		//if (data->character_texture.img == NULL)
+    	data->character_texture = ft_new_sprite(mlx, "sprites/gokuu.xpm"); 
+		mlx_put_image_to_window(mlx, window, data->floor_texture.img,
+   	 		k, l);
+		k = k + 100;	
+	}
+    return (k);
+}
 
 int	ft_draw(t_data *data)//(char **tab, void *mlx, void *window, t_data *data)
 {
@@ -112,6 +121,7 @@ int	ft_draw(t_data *data)//(char **tab, void *mlx, void *window, t_data *data)
 			else if (data->map->map[map.i][map.j] == 'P')
 				map.k = ft_create_character(data->mlx_ptr, data->win_ptr, map.k, map.l, data);
 		}
+
 		map.j = -1;
 		map.l = map.l + 100;
 		map.k = 0;
@@ -132,7 +142,7 @@ int	close_redx(t_data *data)
 	free(data->mlx_ptr);
 	if (data != NULL)
 		free(data);
-	exit(0);
+	exit(SUCCESS);
 }
 
 int	press_keyboard(int key, t_data *data)
@@ -201,6 +211,9 @@ void	ft_refresh_character(char *path, t_data *data)
 	(void)path;
 	ft_draw(data);
 	//data->character_texture = ft_new_sprite(data->mlx_ptr, path);
+	printf("%s%d\n", "ICIIIIIIIIIIIIIIIIIIIIII x", data->map->player.p_pos.x);
+	printf("%s%d\n", "ICIIIIIIIIIIIIIIIIIIIIII y", data->map->player.p_pos.y);
+
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 		data->character_texture.img, data->map->player.p_pos.x * 100, data->map->player.p_pos.y * 100);
 }

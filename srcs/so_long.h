@@ -92,6 +92,8 @@ typedef struct	s_map
 	int			count_line;
 	t_vector	map_max_size;
 	t_player	player;
+	int			player_switch;
+	int			senzu_switch;
 }				t_map;
 
 typedef struct 	s_data
