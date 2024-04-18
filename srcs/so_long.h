@@ -31,6 +31,28 @@
 /* ---------------------STRUCTURES---------------------*/
 /* =================================================== */
 
+typedef struct	s_vector
+{
+	int			x;
+	int			y;
+}				t_vector;
+
+typedef struct	s_gameplay
+{
+	int			forward;
+	int			backward;
+	int			left;
+	int			right;
+	int			look_left;
+	int			look_right;
+	int			escape;
+}				t_gameplay;
+
+typedef struct	s_player
+{
+	t_vector	p_pos;
+	t_gameplay	gamplay;
+}				t_player;
 
 typedef struct s_check
 {
@@ -42,12 +64,6 @@ typedef struct s_check
 	int			k;
 	int			l;
 }				t_check_map;
-
-typedef struct	s_vector
-{
-	int			x;
-	int			y;
-}				t_vector;
 
 typedef struct	s_img
 {
@@ -75,6 +91,7 @@ typedef struct	s_map
 	int			fd;
 	int			count_line;
 	t_vector	map_max_size;
+	t_player	player;
 }				t_map;
 
 typedef struct 	s_data
@@ -83,7 +100,6 @@ typedef struct 	s_data
 	void		*win_ptr; // MLX window pointer
 	int			win_height;
 	int			win_width;
-	void		*textures[5]; // MLX image pointers (on the stack)
 	t_map		*map; // Map pointer (contains map details - preferably kept on the stack)
 	
 	t_img		screen;
@@ -92,10 +108,6 @@ typedef struct 	s_data
 	t_img		floor_texture;
 	t_img		exit_texture;
 	t_img		character_texture;
-	t_vector	character_pos;
-
-	char		*walls_texture_name;
-	char		*floor_texture_name;
 }				t_data;
 
 /* =================================================== */

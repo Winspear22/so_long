@@ -135,10 +135,104 @@ int	close_redx(t_data *data)
 	exit(0);
 }
 
+int	press_keyboard(int key, t_data *data)
+{
+	if (key == XK_w)
+		data->map->player.gamplay.forward = 1;
+	else if (key == XK_s)
+		data->map->player.gamplay.backward = 1;
+	else if (key == XK_a)
+		data->map->player.gamplay.left = 1;
+	else if (key == XK_d)
+		data->map->player.gamplay.right = 1;
+	else if (key == XK_Left)
+		data->map->player.gamplay.look_left = 1;
+	else if (key == XK_Right)
+		data->map->player.gamplay.look_right = 1;
+	else if (key == XK_Escape)
+		data->map->player.gamplay.escape = 1;
+	return (SUCCESS);
+}
+
+int	release_keyboard(int key, t_data *data)
+{
+	if (key == XK_w)
+		data->map->player.gamplay.forward = 0;
+	else if (key == XK_s)
+		data->map->player.gamplay.backward = 0;
+	else if (key == XK_a)
+		data->map->player.gamplay.left = 0;
+	else if (key == XK_d)
+		data->map->player.gamplay.right = 0;
+	else if (key == XK_Left)
+		data->map->player.gamplay.look_left = 0;
+	else if (key == XK_Right)
+		data->map->player.gamplay.look_right = 0;
+	else if (key == XK_Escape)
+		data->map->player.gamplay.escape = 0;
+	return (SUCCESS);
+}
+
+/*int	ft_move_player(int key, t_data *data)
+{
+	//t_program	*i;
+	int			j;
+
+	//i = (t_program *)param;
+	//j = ft_count_movements(*i, key);
+	if (key == 100 && i->tab[i->pos.y][i->pos.x + 1] != '1')
+		i->pos.x += 1;
+	else if (key == 97 && i->tab[i->pos.y][i->pos.x - 1] != '1')
+		i->pos.x -= 1;
+	else if (key == 115 && i->tab[i->pos.y + 1][i->pos.x] != '1')
+		i->pos.y += 1;
+	else if (key == 119 && i->tab[i->pos.y - 1][i->pos.x] != '1')
+		i->pos.y -= 1;
+	ft_refresh_character("sprites/gokuu.xpm", *i);
+	ft_take(i->tab, *i);
+	if (key == 65307)
+		exit(0);
+	mlx_string_put(i->mlx, i->w.ref, 50, 50, 15921105, ft_itoa(j));
+	return (0);
+}*/
+
+void	ft_refresh_character(char *path, t_data *data)
+{
+	ft_draw(data);
+	data->character_texture = ft_new_sprite(data->mlx_ptr, path);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+		data->character_texture.img, data->map->player.p_pos.x * 100, data->map->player.p_pos.y * 100);
+}
+
+int ft_move_player(int key, t_data *data)
+{
+	printf("%s%d\n", "key ==== ", key);
+	printf("%s%d\n", "x ==== ", data->map->player.p_pos.x);
+	printf("%s%d\n", "y ==== ", data->map->player.p_pos.y);
+	if (key == 100 && data->map->map[data->map->player.p_pos.y][data->map->player.p_pos.x + 1] != '1')
+		data->map->player.p_pos.x += 1;
+	if (key == 97 && data->map->map[data->map->player.p_pos.y][data->map->player.p_pos.x - 1] != '1')
+		data->map->player.p_pos.x -= 1;
+	if (key == 115 && data->map->map[data->map->player.p_pos.y + 1][data->map->player.p_pos.x] != '1')
+		data->map->player.p_pos.y += 1;
+	if (key == 119 && data->map->map[data->map->player.p_pos.y - 1][data->map->player.p_pos.x] != '1')
+		data->map->player.p_pos.y -= 1;
+	if (key == XK_Escape)
+		close_redx(data);
+	//free_data(data);
+	ft_refresh_character("sprites/gokuu.xpm", data);
+	return SUCCESS;
+
+}
+
 int loop(t_data *data)
 {
     //ft_draw(data->map->map, data->mlx_ptr, data->win_ptr, data);
-	mlx_loop_hook(data->mlx_ptr, ft_draw, data);
+	//mlx_loop_hook(data->mlx_ptr, ft_draw, data);
+	mlx_hook(data->win_ptr, 2, 1L << 0, &press_keyboard, data);
+	mlx_hook(data->win_ptr, 3, 1L << 1, &release_keyboard, data);
+	mlx_key_hook(data->win_ptr, *ft_move_player, data);
+
     mlx_hook(data->win_ptr, 17, 0L, &close_redx, data);
 	mlx_loop(data->mlx_ptr);
 	return (SUCCESS);
@@ -172,7 +266,7 @@ int main(int argc, char **argv, char **env)
 		return (FAILURE);
 	/*if (create_textures_wall(data) == FAILURE)
 		return (FAILURE);*/
-	//ft_draw(data);
+	ft_draw(data);
     ft_printf("%s%s%s", GREEN, "réussite", RESET);
 	loop(data);		
     return (SUCCESS);

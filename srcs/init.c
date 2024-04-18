@@ -82,9 +82,14 @@ int	init_data(t_data *data)
 	data->map->map = NULL;
 	data->map->fd = 0;
 	data->map->count_line = 0;
-	data->walls_texture_name = NULL;
-	data->floor_texture_name = NULL;
-	data->character_pos.x = 0;
-	data->character_pos.y = 0;
+	data->map->player.p_pos.x = 0;
+	data->map->player.p_pos.y = 0;
+	data->map->player.gamplay.forward = 0;
+	data->map->player.gamplay.backward = 0;
+	data->map->player.gamplay.left = 0;
+	data->map->player.gamplay.right = 0;
+	data->map->player.gamplay.look_left = 0;
+	data->map->player.gamplay.look_right = 0;
+	data->map->player.gamplay.escape = 0;
     return (SUCCESS);
 }

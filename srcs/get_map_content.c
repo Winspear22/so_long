@@ -87,17 +87,25 @@ t_vector	get_map_size(t_data *data)//char **full_map, t_vector size)
 	{
 		while (data->map->map[i][j])
 			j++;
-		if (data->map->map[i][j] == 'P')
+		i++;
+	}
+	map_size.x = j * 100;
+	map_size.y = i * 100;
+	i = 0;
+	while (data->map->map[i])
+	{
+		j = 0;
+		while (data->map->map[i][j])
 		{
-			data->character_pos.x = j * 100;
-			data->character_pos.y = i * 100;
+			if (data->map->map[i][j] == 'P')
+			{
+				data->map->player.p_pos.x = j;
+				data->map->player.p_pos.y = i;
+			}
+			j++;
 		}
 		i++;
 	}
-	ft_printf("%d\n", j);
-	ft_printf("%d\n", i);
-	map_size.x = j * 100;
-	map_size.y = i * 100;
 	return (map_size);
 }
 
