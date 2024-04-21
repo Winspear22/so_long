@@ -1,6 +1,10 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
+/* =================================================== */
+/* ---------------------LIBRAIRIES-------------------- */
+/* =================================================== */
+
 # include "../minilibx-linux/mlx.h"
 # include <stdlib.h>
 # include <stdio.h>
@@ -13,6 +17,12 @@
 # include "../ft_printf/ft_printf.h"
 # include "../ft_printf/libft/libft.h"
 
+/* =================================================== */
+
+
+/* =================================================== */
+/* --------------------DEFINITIONS-------------------- */
+/* =================================================== */
 
 # define SUCCESS	0
 # define FAILURE	-1
@@ -26,6 +36,9 @@
 # define MAGENTA	"\033[1;35m"
 # define CYAN		"\033[1;36m"
 # define WHITE		"\033[1;37m"
+
+/* =================================================== */
+
 
 /* =================================================== */
 /* ---------------------STRUCTURES-------------------- */
@@ -113,6 +126,48 @@ typedef struct 	s_data
 
 /* =================================================== */
 
+/* =================================================== */
+/* -----------------CHECK_LINE_CONTENT.C-------------- */
+/* =================================================== */
+
+int			check_all_elements(t_map *map, t_verif check);
+int			ft_check_wall_map_updown(t_map *map);
+int			ft_check_wall_map_leftright(t_map *map);
+int			check_map_content(t_map *map);
+
+/* =================================================== */
+
+/* =================================================== */
+/*---------------CREATE_TEXTURE_COMPONENTS.C---------- */
+/* =================================================== */
+
+int			ft_draw_walls(void *mlx, void *window, int k, int l, t_data *data);
+int			ft_draw_grass(void *mlx, void *window, int k, int l, t_data *data);
+int			ft_draw_items(void *mlx, void *window, int k, int l, t_data *data);
+int			ft_draw_exit(void *mlx, void *window, int k, int l, t_data *data);
+int			ft_create_character(void *mlx, void *window, int k, int l, t_data *data);
+
+/* =================================================== */
+
+/* =================================================== */
+/*---------------CREATE_TEXTURE_UTILS.C--------------- */
+/* =================================================== */
+
+int			ft_count_items(char **tab);
+t_vector	ft_player_pos(char **tab);
+
+/* =================================================== */
+
+
+/* =================================================== */
+/*-------------------CREATE_TEXTURES.C---------------- */
+/* =================================================== */
+
+t_img		ft_new_sprite(void *mlx, char *path);
+int			ft_draw(t_data *data);
+
+/* =================================================== */
+
 
 /* =================================================== */
 /* -----------------------ERRORS.C-------------------- */
@@ -124,27 +179,6 @@ int			ret_free_txt(char *error_str, t_data *data);
 
 /* =================================================== */
 
-/* =================================================== */
-/* ------------------------FREE.C--------------------- */
-/* =================================================== */
-
-void		free_tab(char **str);
-void		free_loading_txt_failed(t_data *data);
-void		free_struct(t_map *map);
-void		free_data(t_data *data);
-
-/* =================================================== */
-
-
-/* =================================================== */
-/* ------------------------INIT.C--------------------- */
-/* =================================================== */
-
-int			init_data(t_data *data);
-t_verif		verif_init(void);
-
-/* =================================================== */
-
 
 /* =================================================== */
 /* -----------------FIRST_STEP_PARSE.C---------------- */
@@ -153,8 +187,59 @@ t_verif		verif_init(void);
 int			check_directory(char *av);
 int			check_file_existence(char *av);
 int			check_extension(char *av);
-int			check_arguments(int argc, char *argv);
 int			is_executable(const char *filename);
+int			check_arguments(int argc, char *argv);
+
+/* =================================================== */
+
+
+/* =================================================== */
+/* ------------------------FREE.C--------------------- */
+/* =================================================== */
+
+void		free_tab(char **str);
+void		free_struct(t_map *map);
+void		free_loading_txt_failed(t_data *data);
+void		free_data(t_data *data);
+
+/* =================================================== */
+
+
+/* =================================================== */
+/*-----------------------GAMEPLAY.C------------------- */
+/* =================================================== */
+
+void		ft_take(char **tab, t_data *data);
+void		ft_refresh_character(t_data *data);
+int			ft_move_player(int key, t_data *data);
+int			press_keyboard(int key, t_data *data);
+int			release_keyboard(int key, t_data *data);
+
+/* =================================================== */
+
+
+/* =================================================== */
+/* ------------------GET_MAP_CONTENT.C---------------- */
+/* =================================================== */
+
+int			check_get_next_line(char *line);
+int			get_number_of_lines(char *s);
+t_map		*reduce_get_map(t_data *data, int fd);
+t_vector	get_map_size(t_data *data);
+t_map		*get_map(char *s, t_data *data);
+
+/* =================================================== */
+
+
+/* =================================================== */
+/* ------------------------INIT.C--------------------- */
+/* =================================================== */
+
+t_verif		verif_init(void);
+void		init_img(t_data *data);
+void		init_floor_walls_texture(t_data *data);
+void 		init_collectible_exit(t_data *data);
+int			init_data(t_data *data);
 
 /* =================================================== */
 
@@ -164,24 +249,6 @@ int			is_executable(const char *filename);
 /* =================================================== */
 
 int			check_file_content(char *argv, t_data *data);
-
-/* =================================================== */
-
-/* =================================================== */
-/* ------------------GET_MAP_CONTENT.C---------------- */
-/* =================================================== */
-
-int			check_get_next_line(char *line);
-t_map		*reduce_get_map(t_data *data, int fd);
-t_map		*get_map(char *s, t_data *data);
-
-/* =================================================== */
-
-/* =================================================== */
-/* -----------------CHECK_LINE_CONTENT.C-------------- */
-/* =================================================== */
-
-int			check_map_content(t_map *map);
 
 /* =================================================== */
 
@@ -202,48 +269,6 @@ char		*strdup_no_n(const char *s1);
 int			close_redx(t_data *data);
 int			put_new_image_on_screen(t_data *data);
 int			init_window(t_data *data);
-
-/* =================================================== */
-
-/* =================================================== */
-/*-------------------CREATE_TEXTURES.C---------------- */
-/* =================================================== */
-
-t_img		ft_new_sprite(void *mlx, char *path);
-int			ft_draw(t_data *data);
-
-/* =================================================== */
-
-/* =================================================== */
-/*-----------------------GAMEPLAY.C------------------- */
-/* =================================================== */
-
-void		ft_take(char **tab, t_data *data);
-void		ft_refresh_character(t_data *data);
-int			ft_move_player(int key, t_data *data);
-int			press_keyboard(int key, t_data *data);
-int			release_keyboard(int key, t_data *data);
-
-/* =================================================== */
-
-/* =================================================== */
-/*---------------CREATE_TEXTURE_UTILS.C--------------- */
-/* =================================================== */
-
-int			ft_count_items(char **tab);
-t_vector	ft_player_pos(char **tab);
-
-/* =================================================== */
-
-/* =================================================== */
-/*---------------CREATE_TEXTURE_COMPONENTS.C---------- */
-/* =================================================== */
-
-int			ft_draw_walls(void *mlx, void *window, int k, int l, t_data *data);
-int			ft_draw_grass(void *mlx, void *window, int k, int l, t_data *data);
-int			ft_draw_items(void *mlx, void *window, int k, int l, t_data *data);
-int			ft_draw_exit(void *mlx, void *window, int k, int l, t_data *data);
-int			ft_create_character(void *mlx, void *window, int k, int l, t_data *data);
 
 /* =================================================== */
 
