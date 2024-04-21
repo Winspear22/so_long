@@ -121,7 +121,7 @@ typedef struct 	s_data
 
 int			return_failure(char *error_str);
 int			ret_free(char *error_str, char **tab);
-int			ret_free_txt(char *error_str, char **s_byspace, t_data *data);
+int			ret_free_txt(char *error_str, t_data *data);
 
 /* =================================================== */
 
@@ -130,7 +130,7 @@ int			ret_free_txt(char *error_str, char **s_byspace, t_data *data);
 /* =================================================== */
 
 void		free_tab(char **str);
-void		free_loading_txt_failed(t_data *data, char **s_byspace);
+void		free_loading_txt_failed(t_data *data);
 void		free_struct(t_map *map);
 void		free_data(t_data *data);
 

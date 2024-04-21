@@ -30,8 +30,18 @@ t_img	ft_new_sprite(void *mlx, char *path)
 
 	img.img = 0;
 	img.img = mlx_xpm_file_to_image(mlx, path, &img.width, &img.height);
+	if (!img.img)
+	{
+		img.status = 1;
+        return (img);
+	}
 	img.addr = mlx_get_data_addr(img.img,
 			&img.bpp, &img.line, &img.endian);
+	if (!img.addr)
+	{
+		img.status = 1;
+        return (img);
+	}	
 	return (img);
 }
 
@@ -98,7 +108,11 @@ t_vector	ft_player_pos(char **tab)
 int	ft_draw_walls(void *mlx, void *window, int k, int l, t_data *data)
 {
 	if (data->walls_texture.img == NULL)
-    	data->walls_texture = ft_new_sprite(mlx, "sprites/wallhd.xpm"); 
+	{
+    	data->walls_texture = ft_new_sprite(mlx, "sprites/wallhd.xpm");
+		if (data->walls_texture.img == NULL || data->walls_texture.addr == NULL)
+			return (FAILURE);
+	}
 	mlx_put_image_to_window(mlx, window, data->walls_texture.img,
     k, l);
 	k = k + 100;
@@ -108,7 +122,11 @@ int	ft_draw_walls(void *mlx, void *window, int k, int l, t_data *data)
 int	ft_draw_grass(void *mlx, void *window, int k, int l, t_data *data)
 {	
 	if (data->floor_texture.img == NULL)
-    	data->floor_texture = ft_new_sprite(mlx, "sprites/grass.xpm"); 
+	{
+    	data->floor_texture = ft_new_sprite(mlx, "sprites/grass.xpm");
+		if (data->floor_texture.img == NULL || data->floor_texture.addr == NULL)
+			return (FAILURE);
+	}
 	mlx_put_image_to_window(mlx, window, data->floor_texture.img,
     k, l);
 	k = k + 100;
@@ -118,7 +136,11 @@ int	ft_draw_grass(void *mlx, void *window, int k, int l, t_data *data)
 int	ft_draw_items(void *mlx, void *window, int k, int l, t_data *data)
 {
 	if (data->collectible_texture.img == NULL)
-		data->collectible_texture = ft_new_sprite(mlx, "sprites/senzu.xpm"); 
+	{
+    	data->collectible_texture = ft_new_sprite(mlx, "sprites/senzu.xpm");
+		if (data->collectible_texture.img == NULL || data->collectible_texture.addr == NULL)
+			return (FAILURE);
+	}
 	mlx_put_image_to_window(mlx, window, data->collectible_texture.img,
     k, l);
 	k = k + 100;
@@ -128,7 +150,11 @@ int	ft_draw_items(void *mlx, void *window, int k, int l, t_data *data)
 int	ft_draw_exit(void *mlx, void *window, int k, int l, t_data *data)
 {
 	if (data->exit_texture.img == NULL)
-    	data->exit_texture = ft_new_sprite(mlx, "sprites/freezer.xpm"); 
+	{
+    	data->exit_texture = ft_new_sprite(mlx, "sprites/freezer.xpm");
+		if (data->exit_texture.img == NULL || data->exit_texture.addr == NULL)
+			return (FAILURE);
+	}
 	mlx_put_image_to_window(mlx, window, data->exit_texture.img,
     k, l);
 	k = k + 100;
@@ -167,6 +193,8 @@ int	ft_draw(t_data *data)
 	{
 		while (data->map->map[map.i][++map.j])
 		{
+			if (map.k == FAILURE)			
+				ret_free_txt("Error with the texture generation.", data);
 			if (data->map->map[map.i][map.j] == '1')
 				map.k = ft_draw_walls(data->mlx_ptr, data->win_ptr, map.k, map.l, data);
 			else if (data->map->map[map.i][map.j] == '0')
@@ -262,9 +290,6 @@ int loop(t_data *data)
 
 int main(int argc, char **argv, char **env)
 {
-    (void)argc;
-    (void)argv;
-    (void)env;
 	t_data	*data;
 
 	data = NULL;
@@ -289,7 +314,6 @@ int main(int argc, char **argv, char **env)
 	/*if (create_textures_wall(data) == FAILURE)
 		return (FAILURE);*/
 	ft_draw(data);
-    ft_printf("%s%s%s", GREEN, "réussite", RESET);
 	loop(data);		
     return (SUCCESS);
 }

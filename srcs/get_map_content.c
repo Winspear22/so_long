@@ -38,7 +38,6 @@ int		get_number_of_lines(char *s)
 		line = get_next_line(fd2);
 	}
 	close(fd2);
-	ft_printf("%s%d", "number of line in file = ", i);
 	return (i);
 }
 
@@ -48,7 +47,6 @@ t_map	*reduce_get_map(t_data *data, int fd)
 	char	*line;
 	int		i;
 
-	// Allouer suffisamment d'espace pour stocker toutes les lignes du fichier
 	data->map->map = ft_calloc(data->map->count_line + 1, sizeof(char *));
 	if (!(data->map->map))
 		return (NULL);
@@ -61,7 +59,6 @@ t_map	*reduce_get_map(t_data *data, int fd)
 		{
 			if (i < data->map->count_line)
 			{
-				// Copier la ligne dans le tableau
 				data->map->map[i] = strdup_no_n(line);
 				i++;
 			}
@@ -75,7 +72,7 @@ t_map	*reduce_get_map(t_data *data, int fd)
 }
 
 
-t_vector	get_map_size(t_data *data)//char **full_map, t_vector size)
+t_vector	get_map_size(t_data *data)
 {
 	int			i;
 	int			j;

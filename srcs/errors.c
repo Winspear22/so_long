@@ -14,9 +14,9 @@ int	ret_free(char *error_str, char **tab)
 	return (FAILURE);
 }
 
-int	ret_free_txt(char *error_str, char **s_byspace, t_data *data)
+int	ret_free_txt(char *error_str, t_data *data)
 {
-	ft_printf("%s", "\033[1;31m%s\n\033[0m", error_str);
-	free_loading_txt_failed(data, s_byspace);
+	ft_printf("\033[1;31m%s\n\033[0m", error_str);
+	free_loading_txt_failed(data);
 	return (FAILURE);
 }
