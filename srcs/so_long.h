@@ -28,7 +28,7 @@
 # define WHITE		"\033[1;37m"
 
 /* =================================================== */
-/* ---------------------STRUCTURES---------------------*/
+/* ---------------------STRUCTURES-------------------- */
 /* =================================================== */
 
 typedef struct	s_vector
@@ -98,12 +98,11 @@ typedef struct	s_map
 
 typedef struct 	s_data
 {
-	void		*mlx_ptr; // MLX pointer
-	void		*win_ptr; // MLX window pointer
+	void		*mlx_ptr;
+	void		*win_ptr;
 	int			win_height;
 	int			win_width;
-	t_map		*map; // Map pointer (contains map details - preferably kept on the stack)
-	
+	t_map		*map;
 	t_img		screen;
 	t_img		walls_texture;
 	t_img		collectible_texture;
@@ -116,7 +115,7 @@ typedef struct 	s_data
 
 
 /* =================================================== */
-/* -----------------------ERRORS.C---------------------*/
+/* -----------------------ERRORS.C-------------------- */
 /* =================================================== */
 
 int			return_failure(char *error_str);
@@ -126,7 +125,7 @@ int			ret_free_txt(char *error_str, t_data *data);
 /* =================================================== */
 
 /* =================================================== */
-/* ------------------------FREE.C----------------------*/
+/* ------------------------FREE.C--------------------- */
 /* =================================================== */
 
 void		free_tab(char **str);
@@ -138,7 +137,7 @@ void		free_data(t_data *data);
 
 
 /* =================================================== */
-/* ------------------------INIT.C----------------------*/
+/* ------------------------INIT.C--------------------- */
 /* =================================================== */
 
 int			init_data(t_data *data);
@@ -148,7 +147,7 @@ t_verif		verif_init(void);
 
 
 /* =================================================== */
-/* -----------------FIRST_STEP_PARSE.C-----------------*/
+/* -----------------FIRST_STEP_PARSE.C---------------- */
 /* =================================================== */
 
 int			check_directory(char *av);
@@ -161,7 +160,7 @@ int			is_executable(const char *filename);
 
 
 /* =================================================== */
-/* ----------------SECOND_STEP_PARSE.C-----------------*/
+/* ----------------SECOND_STEP_PARSE.C---------------- */
 /* =================================================== */
 
 int			check_file_content(char *argv, t_data *data);
@@ -169,7 +168,7 @@ int			check_file_content(char *argv, t_data *data);
 /* =================================================== */
 
 /* =================================================== */
-/* ------------------GET_MAP_CONTENT.C-----------------*/
+/* ------------------GET_MAP_CONTENT.C---------------- */
 /* =================================================== */
 
 int			check_get_next_line(char *line);
@@ -179,7 +178,7 @@ t_map		*get_map(char *s, t_data *data);
 /* =================================================== */
 
 /* =================================================== */
-/* -----------------CHECK_LINE_CONTENT.C---------------*/
+/* -----------------CHECK_LINE_CONTENT.C-------------- */
 /* =================================================== */
 
 int			check_map_content(t_map *map);
@@ -188,25 +187,64 @@ int			check_map_content(t_map *map);
 
 
 /* =================================================== */
-/* -----------------------UTILS.C----------------------*/
+/* -----------------------UTILS.C--------------------- */
 /* =================================================== */
 
 int			parse(char *argv);
 char		*strdup_no_n(const char *s1);
 
 /* =================================================== */
-/*------------------------WINDOW.C---------------------*/
+
+/* =================================================== */
+/*------------------------WINDOW.C-------------------- */
 /* =================================================== */
 
+int			close_redx(t_data *data);
 int			put_new_image_on_screen(t_data *data);
 int			init_window(t_data *data);
 
 /* =================================================== */
-/*------------------------WINDOW.C---------------------*/
+
+/* =================================================== */
+/*-------------------CREATE_TEXTURES.C---------------- */
 /* =================================================== */
 
-int	get_xpm_to_img(t_data *data, char **s, char *texture, t_img *txt);
-int	reduce_create_textures_wall(t_data *data, char *s);
-int create_textures_wall(t_data *data);
+t_img		ft_new_sprite(void *mlx, char *path);
+int			ft_draw(t_data *data);
+
+/* =================================================== */
+
+/* =================================================== */
+/*-----------------------GAMEPLAY.C------------------- */
+/* =================================================== */
+
+void		ft_take(char **tab, t_data *data);
+void		ft_refresh_character(t_data *data);
+int			ft_move_player(int key, t_data *data);
+int			press_keyboard(int key, t_data *data);
+int			release_keyboard(int key, t_data *data);
+
+/* =================================================== */
+
+/* =================================================== */
+/*---------------CREATE_TEXTURE_UTILS.C--------------- */
+/* =================================================== */
+
+int			ft_count_items(char **tab);
+t_vector	ft_player_pos(char **tab);
+
+/* =================================================== */
+
+/* =================================================== */
+/*---------------CREATE_TEXTURE_COMPONENTS.C---------- */
+/* =================================================== */
+
+int			ft_draw_walls(void *mlx, void *window, int k, int l, t_data *data);
+int			ft_draw_grass(void *mlx, void *window, int k, int l, t_data *data);
+int			ft_draw_items(void *mlx, void *window, int k, int l, t_data *data);
+int			ft_draw_exit(void *mlx, void *window, int k, int l, t_data *data);
+int			ft_create_character(void *mlx, void *window, int k, int l, t_data *data);
+
+/* =================================================== */
 
 #endif

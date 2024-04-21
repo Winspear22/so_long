@@ -1,5 +1,20 @@
 # include "so_long.h"
 
+int	close_redx(t_data *data)
+{
+	if (data->win_ptr)
+	{
+		free_data(data);
+		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+		mlx_destroy_display(data->mlx_ptr);
+		data->win_ptr = NULL;
+	}
+	free(data->mlx_ptr);
+	if (data != NULL)
+		free(data);
+	exit(SUCCESS);
+}
+
 int	put_new_image_on_screen(t_data *data)
 {
 	data->screen.img = mlx_new_image(data->mlx_ptr, data->win_width,

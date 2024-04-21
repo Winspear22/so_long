@@ -1,53 +1,55 @@
 # include "so_long.h"
 
-int get_xpm_to_img(t_data *data, char **s, char *texture, t_img *txt)
+t_img	ft_new_sprite(void *mlx, char *path)
 {
-    txt->img = mlx_xpm_file_to_image(data->mlx_ptr, texture, &txt->width, &txt->height);
-    if (!txt->img)
-        return (ret_free_txt("Error\nmlx_xpm_to_image failed.", s, data));
-    txt->addr = mlx_get_data_addr(txt->img, &txt->bpp,
-                                   &txt->line, &txt->endian);
-    if (!txt->addr)
-        return (ret_free_txt("Error\nmlx_get_data_addr failed.", s, data));
-    txt->status = 1;
-    //mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, txt->img, 0, 0);
+	t_img	img;
 
-    return (SUCCESS);
+	img.img = 0;
+	img.img = mlx_xpm_file_to_image(mlx, path, &img.width, &img.height);
+	if (!img.img)
+	{
+		img.status = 1;
+        return (img);
+	}
+	img.addr = mlx_get_data_addr(img.img,
+			&img.bpp, &img.line, &img.endian);
+	if (!img.addr)
+	{
+		img.status = 1;
+        return (img);
+	}	
+	return (img);
 }
 
-int reduce_create_textures_wall(t_data *data, char *s)
-{
-    if (ft_strncmp(s, "0", 1) == 0)
-    {
-        if (get_xpm_to_img(data, &s, "./sprites/grass.xpm",
-                           &data->floor_texture) == FAILURE)
-            return (FAILURE);
-    }
-    if (ft_strncmp(s, "1", 1) == 0)
-    {
-        if (get_xpm_to_img(data, &s, "./sprites/wallhd.xpm",
-                           &data->walls_texture) == FAILURE)
-            return (FAILURE);
-    }
-    return (SUCCESS);
-}
 
-int create_textures_wall(t_data *data)
+int	ft_draw(t_data *data)
 {
-    int i;
-    int j;
+	t_check_map	map;
 
-    i = -1;
-    while (data->map->map[++i])
-    {
-        j = -1;
-        while (data->map->map[i][++j])
-        {
-            if (ft_strncmp(&data->map->map[i][j], "0", 1) == 0)
-                reduce_create_textures_wall(data, "0");
-            if (ft_strncmp(&data->map->map[i][j], "1", 1) == 0)
-                reduce_create_textures_wall(data, "1");
-        }
-    }
-    return (SUCCESS);
+	map.i = -1;
+	map.j = -1;
+	map.k = 0;
+	map.l = 0;
+	while (data->map->map[++map.i])
+	{
+		while (data->map->map[map.i][++map.j])
+		{
+			if (map.k == FAILURE)			
+				ret_free_txt("Error with the texture generation.", data);
+			if (data->map->map[map.i][map.j] == '1')
+				map.k = ft_draw_walls(data->mlx_ptr, data->win_ptr, map.k, map.l, data);
+			else if (data->map->map[map.i][map.j] == '0')
+				map.k = ft_draw_grass(data->mlx_ptr, data->win_ptr, map.k, map.l, data);
+			if (data->map->map[map.i][map.j] == 'C')
+				map.k = ft_draw_items(data->mlx_ptr, data->win_ptr, map.k, map.l, data);
+			if (data->map->map[map.i][map.j] == 'E')
+				map.k = ft_draw_exit(data->mlx_ptr, data->win_ptr, map.k, map.l, data);
+			else if (data->map->map[map.i][map.j] == 'P')
+				map.k = ft_create_character(data->mlx_ptr, data->win_ptr, map.k, map.l, data);
+		}
+		map.j = -1;
+		map.l = map.l + 100;
+		map.k = 0;
+	}
+	return SUCCESS;
 }

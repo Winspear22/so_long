@@ -25,6 +25,9 @@ SRCS =	./srcs/get_next_line.c \
 		./srcs/utils.c \
 		./srcs/window.c \
 		./srcs/create_textures.c \
+		./srcs/gameplay.c \
+		./srcs/create_textures_utils.c \
+		./srcs/create_textures_components.c \
 		./srcs/main.c \
 
 OBJS	= ${SRCS:.c=.o}
