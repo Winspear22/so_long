@@ -28,14 +28,12 @@ int main(int argc, char **argv, char **env)
 	if (check_file_content(argv[1], data) == FAILURE)
 	{
 		free_data(data);
-        free(data); // Libération de la mémoire pour data
-		ft_printf("%s%s%s", RED, "Error in the second step.", RESET);
+        free(data);
+		ft_printf("%s%s%s", RED, "Error in the second step of the parsing (the map content).", RESET);
 		return (FAILURE);
 	}
 	if (init_window(data) == FAILURE)
 		return (FAILURE);
-	/*if (create_textures_wall(data) == FAILURE)
-		return (FAILURE);*/
 	ft_draw(data);
 	loop(data);		
     return (SUCCESS);

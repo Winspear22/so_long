@@ -41,5 +41,8 @@ Pour lancer so_long, il suffit de lancer le programme avec une map existente et 
 
 Toute map invalide renverra une erreur.
 
+Tada !! Le jeu fonctionne : 
 
-sudo apt-get install pv (pour la barre du Makefile)
+![Affichage de mon résultat résultat](images/so_long00.png)
+
+![Affichage de mon résultat résultat](images/so_long01.png)
